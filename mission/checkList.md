@@ -24,6 +24,7 @@
         - 부모 컴포넌트(Home.vue)에서 text를 받아옴
         - 받아온 text, 글자섞기버튼, 알림버튼 렌더링
 #### [ 기능 ]
+- input에 글자 입력시 실시간으로 아래에 보여주기
 - 글자 1칸씩 회전
     - componentes/TextView.vue
         - 글자섞기버튼 클릭시 부모컴포넌트(Home.vue)에서 보내준 shakeText 함수 실행
