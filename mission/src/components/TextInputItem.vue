@@ -15,14 +15,15 @@
 
 <script>
 export default {
-  name: 'HomeInputItem',
+  name: 'TextInputItem',
   data() {
     return {
       text: '',
     };
   },
   props: {
-    isText: { type: Boolean },
+    isText: { type: Boolean, default: false },
+    textModified: { type: String, default: '' },
   },
   emits: {
     updateText: { type: Function },
@@ -32,6 +33,12 @@ export default {
       // console.log('handleInput ::::: ');
       const { text } = this;
       this.$emit('updateText', text);
+    },
+  },
+  watch: {
+    textModified() {
+      // text 순서가 바뀌었을 경우, props의 textModified 의 변경을 감지하고 data의 text를 업데이트
+      this.text = this.textModified;
     },
   },
 };
