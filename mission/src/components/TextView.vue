@@ -5,11 +5,13 @@
 <div class="blank_box_30"></div>
 <div class="flex row justify_center">
     <button type="button" class="btn btn_basic btn_green"
+    :class="{ disabled : !isText }"
     @click="handleShakeText">
       글자 섞기
     </button>
     <div class="blank_box_15"></div>
     <button type="button" class="btn btn_basic btn_gray"
+    :class="{ disabled : !isText }"
     @click="handleClickBtn">
       알림
     </button>
@@ -23,10 +25,17 @@ export default {
     text: {
       type: String,
       required: true,
+      default: '',
     },
     clickCnt: {
       type: Number,
       required: true,
+      default: 0,
+    },
+    isText: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
   },
   emits: {
