@@ -1,4 +1,4 @@
-* {box-sizing: border-box;}
+* {box-sizing: border-box; margin: 0; padding: 0;}
 input {
     outline-width: 0;
     font-size: 16px; font-weight: 400; letter-spacing: -0.5px;
@@ -30,7 +30,8 @@ button.btn {
 }
 .btn.btn_green {background-color: #42b983; border: 0; color: #fff;}
 .btn.btn_gray {background-color: #35485e; border: 0; color: #fff;}
-.btn:hover {
+.btn.disabled {background-color: #dbdbdb; color: #9b9b9b;}
+.btn:not(.disabled):hover {
     transform: translateX(-10px); transform: translateY(-10px);
     box-shadow: 4px 0 10px 0 rgba(0, 0, 0, 0.2);
 }
