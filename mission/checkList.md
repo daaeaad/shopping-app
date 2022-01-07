@@ -44,4 +44,13 @@
 - TextInputItem.vue에 input 포커싱 스타일 추가
     - isText가 false일때 .focus 클래스가 추가되면서 스타일이 적용됨.
 #### [ 단위 테스트 ]
-- Home.vue의 함수 단위테스트 진행 (/test/unit/home.spec.js)
+- Home.vue의 함수 단위테스트 진행 (/tests/unit/home.spec.js)
+
+
+## 220107
+
+#### [ 기능 ]
+- 알림 버튼 클릭시 alert창 대신 modal 창이 뜨도록 수정
+    - /components/Modal.vue 컴포넌트 추가
+- 글자 섞기를 했을 때 input 입력란의 text만 변경되지 않는 현상 수정
+    - /components/TextInputItem.vue 의 props에 textModified 추가, 글자섞기로 인한 변경시 data 업데이트
