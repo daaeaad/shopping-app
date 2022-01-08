@@ -119,7 +119,6 @@ export default {
     /* alert */
     openAlert() {
       alert(`${this.text} \n 클릭한 횟수는 ${this.clickCnt}번 입니다.`);
-      console.log('process.env:: ', process.env);
     },
   },
 };
