@@ -23,7 +23,7 @@
     <template v-slot:content>
       {{text}}
       <br/>
-      {{clickCnt}}
+      클릭한 횟수는 {{clickCnt}}번 입니다.
     </template>
     <template v-slot:button_name>닫기</template>
   </Modal>
@@ -108,12 +108,18 @@ export default {
 
       if (this.isText) { // 검증 결과 문제 없으면,
         this.clickCnt = cnt; // count 데이터 업데이트
-        this.toggleModal(); // 텍스트와 클릭횟수 띄울 모달창 열기
+        this.openAlert(); // 텍스트와 클릭횟수 띄울 모달창 열기
       }
     },
     /* modal 열기/닫기 */
     toggleModal() {
       this.isModalOpen = !this.isModalOpen;
+      alert('asdf');
+    },
+    /* alert */
+    openAlert() {
+      alert(`${this.text} \n 클릭한 횟수는 ${this.clickCnt}번 입니다.`);
+      console.log('process.env:: ', process.env);
     },
   },
 };
