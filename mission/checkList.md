@@ -49,8 +49,18 @@
 
 ## 220107
 
-#### [ 기능 ]
+#### [ 수정사항 ]
 - 알림 버튼 클릭시 alert창 대신 modal 창이 뜨도록 수정
     - /components/Modal.vue 컴포넌트 추가
 - 글자 섞기를 했을 때 input 입력란의 text만 변경되지 않는 현상 수정
     - /components/TextInputItem.vue 의 props에 textModified 추가, 글자섞기로 인한 변경시 data 업데이트
+
+
+## 220108
+
+#### [ 수정사항 ]
+- 알림 버튼 클릭시 modal 창 -> alert 창으로 다시 변경
+- alert 사용시 eslint no-alert 규칙으로 뜨는 경고메시지 삭제를 위해 .eslintrc.js 설정 추가
+    - .eslintrc.js  17
+        - 'no-alert': 'off',
+        
