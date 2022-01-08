@@ -6,13 +6,15 @@
 <div class="flex row justify_center">
     <button type="button" class="btn btn_basic btn_green"
     :disabled="!isText"
-    @click="handleShakeText">
+    @click="handleShakeText"
+    data-testid="btnShakeText">
       글자 섞기
     </button>
     <div class="blank_box_15"></div>
     <button type="button" class="btn btn_basic btn_gray"
     :disabled="!isText"
-    @click="handleClickBtn">
+    @click="handleClickBtn"
+    data-testid="handleClickBtn">
       알림
     </button>
 </div>
