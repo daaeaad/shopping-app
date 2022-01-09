@@ -59,7 +59,9 @@ export default {
     checkText(text = '') {
       // console.log('checkText ::::: ');
 
+      // data의 text가 비어있고, input에 text가 입력됐을 경우
       let thisText = this.text;
+      // data의 text가 비어있지 않은 경우
       if (text) { thisText = text; }
 
       // props의 text 데이터가 빈값이면, false
@@ -108,7 +110,7 @@ export default {
 
       if (this.isText) { // 검증 결과 문제 없으면,
         this.clickCnt = cnt; // count 데이터 업데이트
-        this.openAlert(); // 텍스트와 클릭횟수 띄울 모달창 열기
+        this.openAlert(); // 텍스트와 클릭횟수 alert
       }
     },
     /* modal 열기/닫기 */
