@@ -31,8 +31,11 @@ describe('TextView.vue - trigger event', () => {
   beforeEach(() => {
     spyFn.handleShakeText = jest.spyOn(TextView.methods, 'handleShakeText');
     spyFn.handleClickBtn = jest.spyOn(TextView.methods, 'handleClickBtn');
-    wrapper = mount('TextView');
-    wrapper.vm.text('ABCD');
+    wrapper = mount(TextView, {
+      props: {
+        text: 'ABCD',
+      },
+    });
   });
 
   test('성공 :: 글자 섞기 버튼을 클릭하면 handleShakeText 함수가 실행됩니다. ', () => {
