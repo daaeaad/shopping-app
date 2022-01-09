@@ -114,7 +114,6 @@ export default {
     /* modal 열기/닫기 */
     toggleModal() {
       this.isModalOpen = !this.isModalOpen;
-      alert('asdf');
     },
     /* alert */
     openAlert() {
