@@ -7,14 +7,14 @@
     <button type="button" class="btn btn_basic btn_green"
     :disabled="!isText"
     @click="handleShakeText"
-    data-testid="btnShakeText">
+    data-test="btnShakeText">
       글자 섞기
     </button>
     <div class="blank_box_15"></div>
     <button type="button" class="btn btn_basic btn_gray"
     :disabled="!isText"
     @click="handleClickBtn"
-    data-testid="handleClickBtn">
+    data-test="handleClickBtn">
       알림
     </button>
 </div>
