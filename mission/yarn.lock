@@ -10674,11 +10674,14 @@
     "@vue/devtools-api" "^6.0.0-beta.11"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "w3c-hr-time@^1.0.1":
   "integrity" "sha512-z8P5DvDNjKDoFIHK7q8r8lackT6l+jo/Ye3HOle7l9nICP9lf1Ci25fy9vHd0JOWewkIFzXIEig3TdKT7JQ5fQ=="
   "resolved" "https://registry.npmjs.org/w3c-hr-time/-/w3c-hr-time-1.0.2.tgz"
   "version" "1.0.2"
 =======
+=======
+>>>>>>> 03e08be ([Week 2] Add template & mission docs)
 w3-css@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/w3-css/-/w3-css-4.1.0.tgz#7872f2738d96a5732bac7718869151e3a5373ce4"
