@@ -1,0 +1,84 @@
+* {box-sizing: border-box; margin: 0; padding: 0;}
+input {
+    outline-width: 0;
+    font-size: 16px; font-weight: 400; letter-spacing: -0.5px;
+    padding: 10px 15px;
+    border: 1px solid #dbdbdb;
+    color: #444;
+}
+input::placeholder {
+    font-weight: 300;
+    color: #989898;
+}
+input.input_basic {
+    width: 100%; height: auto;
+    padding: 15px 20px;
+    font-size: 24px; font-weight: 400; letter-spacing: -0.5px;
+    color: #444; border: 1px solid #dbdbdb;
+}
+button {
+    outline-width: 0; background: none; border: 0;
+}
+button.btn {
+    min-width: 80px; min-height: 48px; padding: 1em 1.7em;
+    font-size: 16px; font-weight: 500;
+    border-radius: 30px;
+    color: #444;
+    border: 1px solid #dbdbdb;
+    transition:0.4s;
+    cursor: pointer;
+}
+.btn.btn_green {background-color: #42b983; border: 0; color: #fff;}
+.btn.btn_gray {background-color: #35485e; border: 0; color: #fff;}
+.btn:disabled {background-color: #dbdbdb; color: #9b9b9b; cursor: initial;}
+.btn:not(:disabled):hover {
+    transform: translateX(-10px); transform: translateY(-10px);
+    box-shadow: 4px 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+.btn.btn_green.clicked {
+    transform: translateX(0px); transform: translateY(0px);
+    background-color: #2a835a;
+    box-shadow: 0;
+}
+.btn.btn_gray.clicked {
+    transform: translateX(0px); transform: translateY(0px);
+    background-color: #141f2c;
+    box-shadow: 0;
+}
+.input_frame, .btn_frame, .txt_frame {
+    width: 100%; height: auto;
+    padding: 10px;
+}
+
+.txt {
+    font-size: 24px; font-weight: 600; color: #444; word-break: keep-all;
+}
+
+.align_center {
+    text-align: center;
+}
+.flex {
+    display: flex;
+}
+.flex.row {
+    flex-direction: row;
+}
+.flex.align_center {
+    align-items: center;
+}
+.flex.justify_space_between {
+    justify-content: space-between;
+}
+.flex.justify_space_around {
+    justify-content: space-around;
+}
+.flex.justify_center {
+    justify-content: center;
+}
+
+.blank_box_15 {
+    width: 15px; height: 15px; min-width: 15px; min-height: 15px;
+}
+.blank_box_30 {
+    width: 30px; height: 30px; min-width: 30px; min-height: 30px;
+}
