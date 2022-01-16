@@ -17,15 +17,15 @@
 
 <script>
 export default {
-  name: "TextInputItem",
+  name: 'TextInputItem',
   data() {
     return {
-      text: "",
+      text: '',
     };
   },
   props: {
     isText: { type: Boolean, default: false },
-    textModified: { type: String, default: "" },
+    textModified: { type: String, default: '' },
   },
   emits: {
     updateText: { type: Function },
@@ -34,7 +34,7 @@ export default {
     handleInput() {
       // console.log('handleInput ::::: ');
       const { text } = this;
-      this.$emit("updateText", text);
+      this.$emit('updateText', text);
     },
   },
   watch: {
