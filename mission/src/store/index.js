@@ -39,7 +39,7 @@ export default createStore({
             'https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y',
           ], // 대표 이미지(배열)
           price: 160000, // 가격(원래가격)
-          isDiscount: true, // 할인여부(Boolean)
+          isDiscount: false, // 할인여부(Boolean)
           discoutPercent: 10, // 할인율
           discountPrice: 144000, // 할인가격
           description:
@@ -197,7 +197,8 @@ export default createStore({
       const { likeProduct } = getters.getUser;
       const { id } = getters.getProduct;
       const isLike = likeProduct.filter((item) => item === id);
-      if (!isLike) {
+
+      if (!isLike.length) {
         return false;
       }
       return true;

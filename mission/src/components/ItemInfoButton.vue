@@ -40,7 +40,7 @@ export default {
       whyOrderNotPossible: this.$store.getters.getProduct.whyOrderNotPossible,
 
       // 찜버튼
-      isLikeProduct: this.$store.state.loggedUser.data[0].likeProduct,
+      isLikeProduct: this.$store.getters.getisLike,
     };
   },
   methods: {
