@@ -29,10 +29,12 @@
           <p class="txt size_12 line_height_15">
             {{ item.content }}
           </p>
-          <div class="img_box square">
-            <div class="inner">
-              <div class="img_frame">
-                <img :src="item.img" alt="" data-test="imgMain" />
+          <div v-if="item.img.length">
+            <div class="img_box square">
+              <div class="inner">
+                <div class="img_frame">
+                  <img :src="item.img" alt="" data-test="imgMain" />
+                </div>
               </div>
             </div>
           </div>

@@ -109,9 +109,7 @@ export default createStore({
           modifiedAt: '2022-01-30 22:33:44', // 수정일시(Datetime)
           title: '맘에 들어요', // 제목
           content: '너무 마음에 드네요!', // 내용
-          img: [
-            'https://i.picsum.photos/id/25/5616/3744.jpg?hmac=-arXS3jYY2wz-lLUaSF2TzodrlDHDa-F8FPkrH-uxUI',
-          ], // 이미지(1개)
+          img: [], // 이미지(1개)
           rating: 4, // 별점
           optionInfo: '[COLOR] Gray, [SIZE] Medium', // 구매옵션 정보 (db의 유저테이블에서 가져올지 아니면 구매내역테이블이 따로 생길지 모르기 때문에 일단 유저가 직접 리뷰에 작성하는걸로 가정함)
         },
