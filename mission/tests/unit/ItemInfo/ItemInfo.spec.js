@@ -83,7 +83,7 @@ describe('ItemStoreInfo', () => {
   });
 
   it('판매자 해시태그 개수는 store.state.userCompany의 tags 배열의 길이과 같습니다.', () => {
-    const tags = wrapper.find('[data-test="tags"]').findAll('a');
+    const tags = wrapper.find('[data-test="tags"]').findAll('[data-test="tag_item"]');
     const data = store.getters.getStore;
     const tagsArr = data.tags;
     expect(tags.length).toBe(tagsArr.length);
