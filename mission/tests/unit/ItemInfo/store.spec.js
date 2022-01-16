@@ -33,6 +33,49 @@ describe('product data', () => {
     expect(result).toBe(12000);
   });
 
+  it('옵션 정보가 있으면 작성된 옵션명 데이터를 반환합니다.', () => {
+    const option = ['color', 'size'];
+    const result = !option.length ? false : option;
+    expect(result).toEqual(['color', 'size']);
+  });
+
+  it('옵션 중 color는 문자열로 세부 정보를 반환합니다.', () => {
+    const optionData = {
+      color: ['Black', 'White'],
+    };
+    let result;
+    result = optionData.color.join(', ');
+    expect(result).toBe('Black, White');
+  });
+
+  it('getters.getOptionSize 은 사이즈 객체의 키값을 배열로 반환합니다.', () => {
+    const data = {
+      color: ['Black', 'White'],
+      size: {
+        small: [
+          { totalLength: 58 },
+          { sholderWidth: 42 },
+          { chestWidth: 50 },
+          { sleeveLength: 62 },
+          { hemWidth: 22 },
+        ],
+        medium: [
+          { totalLength: 58 },
+          { sholderWidth: 42 },
+          { chestWidth: 50 },
+          { sleeveLength: 62 },
+          { hemWidth: 22 },
+        ],
+      },
+    };
+    const result = [];
+    Object.entries(data.size).forEach(([key]) => result.push(key));
+
+    expect(result).toEqual(['small', 'medium']);
+  });
+});
+
+describe('userCompany(store) data', () => {
   it('state.userCompany의 status가 0이면 false 를 반환합니다.', () => {
     const state = { userCompany: { status: 0, data: [{ id: 1, name: 'aa' }] } };
 
@@ -46,7 +89,9 @@ describe('product data', () => {
     const result = !state.userCompany.status ? false : state.userCompany.data;
     expect(result).toEqual([{ id: 1, name: 'aa' }]);
   });
+});
 
+describe('review data', () => {
   it('state.review의 status가 0이면 false 를 반환합니다.', () => {
     const state = {
       review: { status: 0, data: [{ id: 1, name: 'review', date: '2022-01-01 11:22:33' }] },

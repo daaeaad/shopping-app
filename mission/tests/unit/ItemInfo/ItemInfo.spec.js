@@ -5,6 +5,7 @@ import ItemInfoPage from '@/views/ItemInfo.vue';
 import ItemInfoVisual from '@/components/ItemInfoVisual.vue';
 import ItemInfoStoreInfo from '@/components/ItemInfoStoreInfo.vue';
 import ItemInfoBasicInfo from '@/components/ItemInfoBasicInfo.vue';
+import ItemInfoDetailInfo from '@/components/ItemInfoDetailInfo.vue';
 
 describe('ItemInfoPage', () => {
   it('redners ItemInfoPage', () => {
@@ -143,5 +144,51 @@ describe('ItemInfoBasicInfo', () => {
       discountPrice = `${data.discoutPercent} ${data.discountPrice}`;
     }
     expect(discountPrice).toBe(`${data.discoutPercent} ${data.discountPrice}`);
+  });
+});
+
+describe('ItemInfoDetailInfo', () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = mount(ItemInfoDetailInfo, {
+      global: {
+        plugins: [store],
+      },
+    });
+  });
+
+  it('옵션명이 있는 데이터를 받으면 옵션을 표시할 영역을 렌더링 합니다.', () => {
+    const { optionName } = store.getters.getProduct;
+    const optionSection = !optionName.length
+      ? false
+      : wrapper.find('[data-test="optionSection"]').exists();
+    expect(optionSection).toBeTruthy();
+  });
+
+  it('옵션명이 있는 데이터를 받으면 옵션 정보를 받아옵니다.', () => {
+    const { optionName } = store.getters.getProduct;
+    const optionData = {
+      color: ['Black', 'White'],
+      size: {
+        small: [
+          { totalLength: 58 },
+          { sholderWidth: 42 },
+          { chestWidth: 50 },
+          { sleeveLength: 62 },
+          { hemWidth: 22 },
+        ],
+      },
+    };
+    const option = !optionName.length ? false : optionData;
+    expect(option).toEqual(optionData);
+  });
+
+  it('옵션명에 맞는 각 영역을 렌더링 합니다.', () => {
+    const optionName = ['color', 'size'];
+    const optionSection = [];
+    optionName.forEach((item) => {
+      optionSection.push(wrapper.find(`[data-test="${item}"]`).exists());
+    });
+    expect(optionSection).toEqual([true, true]);
   });
 });
