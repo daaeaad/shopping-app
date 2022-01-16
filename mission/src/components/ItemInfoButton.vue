@@ -8,13 +8,13 @@
       </span>
 
       <div v-if="data" class="flex row align_center lay_1">
-        <!-- <button type="button" :disabled="!data || !isPossibleOrder" @click="handleBtnLike">
+        <button type="button" :disabled="!data || !isPossibleOrder" @click="handleBtnLike">
           <ion-icon
             :name="isLikeProduct ? 'heart' : 'heart-empty'"
             class="btn_like"
             :class="isLikeProduct ? 'act' : ''"
           ></ion-icon>
-        </button> -->
+        </button>
         <div class="line verti"></div>
         <button type="button" class="lay_1" :disabled="!data || !isPossibleOrder">
           <p class="txt size_14 weight_b color_white lay_1">
