@@ -232,6 +232,30 @@ export default createStore({
       // 찜한 상품이 맞으면
       return true;
     },
+
+    // 상품 옵션: 컬러
+    getOptionColor: (state, getters) => {
+      if (!getters.getProduct) {
+        return false;
+      }
+      // 상품의 옵션 세부 정보
+      const { color } = getters.getProduct.option;
+      // 컬러 배열을 문자열로 바꿔 결과값으로 할당한다.
+      const result = color.join(', ');
+      // 결과값 반환
+      return result;
+    },
+
+    getOptionSize: (state, getters) => {
+      if (!getters.getProduct) {
+        return false;
+      }
+      const result = [];
+      // 상품의 옵션 세부 정보
+      const { size } = getters.getProduct.option;
+      Object.entries(size).forEach(([key]) => result.push(key));
+      return result;
+    },
   },
   modules: {},
 });
