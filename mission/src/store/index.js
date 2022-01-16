@@ -39,7 +39,7 @@ export default createStore({
             'https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y',
           ], // 대표 이미지(배열)
           price: 160000, // 가격(원래가격)
-          isDiscount: false, // 할인여부(Boolean)
+          isDiscount: true, // 할인여부(Boolean)
           discoutPercent: 10, // 할인율
           discountPrice: 144000, // 할인가격
           description:
@@ -119,17 +119,29 @@ export default createStore({
   mutations: {
     // 사용자 찜 목록 변경
     changeUserLike: (state, payload) => {
+      const { status } = state.loggedUser;
+      if (!status) {
+        return false;
+      }
+
+      // 찜한 상품 배열
       let { likeProduct } = state.loggedUser.data[0];
+      // 찜한 상품 배열에 현재 상품이 있는지 확인
       const findProduct = likeProduct.find((item) => item === payload);
 
       if (!findProduct) {
+        // 없을 경우 현재 상품을 찜상품 배열에 추가
         likeProduct.push(payload);
       } else {
+        // 있으면 찜상품에서 현재 상품을 제외
         likeProduct = likeProduct.filter((item) => item !== payload);
       }
 
+      // state에 변경사항 업데이트
       state.loggedUser.data[0].likeProduct = likeProduct;
-      console.log(state.loggedUser.data[0].likeProduct);
+      // console.log(state.loggedUser.data[0].likeProduct);
+
+      return true;
     },
   },
   actions: {},
@@ -149,7 +161,10 @@ export default createStore({
         return false;
       }
 
+      // 할인여부, 원래가격, 할인가격
       const { isDiscount, price, discountPrice } = getters.getProduct;
+
+      // 할인중이면 할인가격을, 아니면 원래가격을 결과값으로 할당
       const result = isDiscount ? discountPrice : price;
 
       return result;
@@ -170,11 +185,16 @@ export default createStore({
       if (!review.status) {
         return false;
       }
+
+      // 리뷰 데이터 배열의 객체에 접근
       const reviewData = review.data.map((item) => {
+        // 작성일시와 수정일시에서 시분초 제외
         const createdAt = item.createdAt.split(' ')[0];
         const modifiedAt = item.modifiedAt.split(' ')[0];
+        // 변경된 내용 업데이트
         return { ...item, createdAt, modifiedAt };
       });
+      // 가공한 데이터 반환
       return reviewData;
     },
 
@@ -192,13 +212,24 @@ export default createStore({
       if (!getters.getUser) {
         return false;
       }
+      if (!getters.getProduct) {
+        return false;
+      }
+
+      // 사용자의 찜한상품 배열
       const { likeProduct } = getters.getUser;
+      // 현재 상품의 고유id 가져오기
       const { id } = getters.getProduct;
+
+      // 찜한상품 배열에 현재 상품이 있는지 확인
       const isLike = likeProduct.filter((item) => item === id);
 
       if (!isLike.length) {
+        // 찜한 상품이 아니면
         return false;
       }
+
+      // 찜한 상품이 맞으면
       return true;
     },
   },

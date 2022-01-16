@@ -1,13 +1,19 @@
 <template>
+  <!-- 구매 버튼 영역 { -->
+
   <div id="ItemInfoButton" data-test="ItemInfoButton" class="">
     <div class="btn_frame">
+      <!-- 데이터를 정상적으로 불러오지 못할 경우 { -->
       <span v-if="!data" class="txt size_14 weight_b color_white"
         >상품 정보를 불러오지 못해 지금은 구매할 수 없습니다.
         <br />
         새로고침을 하거나 고객센터에 문의해주세요.
       </span>
+      <!-- } 데이터를 정상적으로 불러오지 못할 경우 -->
 
+      <!-- 데이터를 정상적으로 불러온 경우 { -->
       <div v-if="data" class="flex row align_center lay_1">
+        <!-- 버튼: 찜하기 -->
         <button type="button" :disabled="!data || !isPossibleOrder" @click="handleBtnLike">
           <ion-icon
             :name="isLikeProduct ? 'heart' : 'heart-empty'"
@@ -15,15 +21,27 @@
             :class="isLikeProduct ? 'act' : ''"
           ></ion-icon>
         </button>
+        <!-- / 버튼: 찜하기 -->
+
         <div class="line verti"></div>
+
+        <!-- 버튼: 구매하기 -->
+        <!-- 데이터가 없으면 버튼 비활성화 -->
         <button type="button" class="lay_1" :disabled="!data || !isPossibleOrder">
           <p class="txt size_14 weight_b color_white lay_1">
+            <!-- 주문 가능 여부를 확인,
+            주문 가능할 경우, 현재 가격과 구매하기 텍스트
+            주문 불가능할 경우, 주문 불가능 사유 텍스트-->
             {{ isPossibleOrder ? `${data}원 구매하기` : `${whyOrderNotPossible}` }}
           </p>
         </button>
+        <!-- / 버튼: 구매하기 -->
       </div>
+      <!-- } 데이터를 정상적으로 불러온 경우 -->
     </div>
   </div>
+
+  <!-- } 구매 버튼 영역 -->
 </template>
 
 <script>
