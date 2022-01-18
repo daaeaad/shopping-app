@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
 
     <div class="input_wrap">
@@ -11,23 +11,16 @@
 
       <!-- View
       입력한 text와 버튼 -->
-      <TextView :text="text" :clickCnt="clickCnt" :isText="isText"
-      @shakeText="shakeText" @countClick="countClick" />
+      <TextView
+        :text="text"
+        :clickCnt="clickCnt"
+        :isText="isText"
+        @shakeText="shakeText"
+        @countClick="countClick"
+      />
       <!--/ View -->
     </div>
   </div>
-
-  <!-- Modal
-  : text와 버튼클릭 횟수 -->
-  <Modal v-if="isModalOpen" @toggleModal="toggleModal">
-    <template v-slot:content>
-      {{text}}
-      <br/>
-      클릭한 횟수는 {{clickCnt}}번 입니다.
-    </template>
-    <template v-slot:button_name>닫기</template>
-  </Modal>
-  <!--/ Modal -->
 </template>
 
 <script>
@@ -36,7 +29,6 @@ import '@/assets/style/template.css';
 import HelloWorld from '@/components/HelloWorld.vue';
 import TextInputItem from '@/components/TextInputItem.vue';
 import TextView from '@/components/TextView.vue';
-import Modal from '@/components/Modal.vue';
 
 export default {
   name: 'Home',
@@ -44,7 +36,6 @@ export default {
     HelloWorld,
     TextInputItem,
     TextView,
-    Modal,
   },
   data() {
     return {
@@ -62,12 +53,14 @@ export default {
       // data의 text가 비어있고, input에 text가 입력됐을 경우
       let thisText = this.text;
       // data의 text가 비어있지 않은 경우
-      if (text) { thisText = text; }
+      if (text) {
+        thisText = text;
+      }
 
       // props의 text 데이터가 빈값이면, false
       // props의 text 데이터가 빈값이 아니면, true
       this.isText = !thisText ? Boolean(false) : Boolean(true);
-      return (this.isText);
+      return this.isText;
     },
 
     /* text 변경 */
@@ -108,14 +101,11 @@ export default {
     countClick(cnt) {
       this.checkText(); // 데이터 검증
 
-      if (this.isText) { // 검증 결과 문제 없으면,
+      if (this.isText) {
+        // 검증 결과 문제 없으면,
         this.clickCnt = cnt; // count 데이터 업데이트
         this.openAlert(); // 텍스트와 클릭횟수 alert
       }
-    },
-    /* modal 열기/닫기 */
-    toggleModal() {
-      this.isModalOpen = !this.isModalOpen;
     },
     /* alert */
     openAlert() {
@@ -126,5 +116,9 @@ export default {
 </script>
 
 <style>
-  .input_wrap {width: 100%; height: auto; padding: 30px;}
+.input_wrap {
+  width: 100%;
+  height: auto;
+  padding: 30px;
+}
 </style>
