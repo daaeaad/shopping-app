@@ -1,105 +1,76 @@
 {
   "loggedUser": {
     "status": 1,
-    "data": [
-      {
-        "likeProduct": ["p1", "p2", "p3"]
-      }
-    ]
+    "data": {
+      "likeProduct": ["p1", "p3"]
+    }
   },
-
-  "userCompany": {
-    "status": 1,
-    "data": [
-      {
-        "companyName": "다애스토어",
-        "imgProfile": [
-          "https://i.picsum.photos/id/1003/1181/1772.jpg?hmac=oN9fHMXiqe9Zq2RM6XT-RVZkojgPnECWwyEF1RvvTZk"
-        ],
-        "tags": ["페미닌", "프렌치시크", "러블리", "캐주얼", "오버핏"]
-      }
-    ]
-  },
-
-  "product": {
+  "productList": {
     "status": 1,
     "data": [
       {
         "id": "p1",
-        "name": "Merino Wool Pullover",
+        "name": "SWEATSHIRT FLOWERMARDI_GREY",
         "imgMain": [
           "https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y"
         ],
-        "price": 160000,
-        "isDiscount": true,
-        "discoutPercent": 10,
-        "discountPrice": 144000,
-        "description": "<div style=\"font-size:12px; line-height:1.5\">100% 메리노 울 원사로 제작 된 풀어보 니트 입니다.<br/>도톰한 중량감으로 한 겨울에 이너웨어로 착용하기 좋습니다.<br/>네크라인이 깊어 여성스러운 핏을 연출합니다.<br/><br/>혼용률 : MERINO WOOL 100%<br/><br/>세탁: 반드시 드라이크리닝을 하시기 바랍니다.<br/><br/>모델 사이즈<br/>174cm / 상의: s / 하의: m</div><br/><div><img src=\"https://i.picsum.photos/id/1010/5184/3456.jpg?hmac=7SE0MNAloXpJXDxio2nvoshUx9roGIJ_5pZej6qdxXs\" alt=\"\" style=\"width:100%; height:auto;\"><img src=\"https://i.picsum.photos/id/1059/7360/4912.jpg?hmac=vVWk1qyiXN_VgPhpNqFm3yl2HUPW6fHqYOjTHYO2bHQ\" alt=\"\" style=\"width:100%; height:auto;\"></div>",
-        "isPossibleOrder": true,
+        "originalPrice": 80000,
+        "currentPrice": 80000,
+        "isPossibleOrde": true,
         "whyOrderNotPossible": "",
-        "totalLike": 12000,
-        "totalOrder": 1130,
-        "totalReview": 5,
-        "totalRating": 4.3,
-        "material": "MERIONO WOOL 100%",
-        "manufacturer": "다애모직",
-        "country": "Korea",
-        "isWriteOption": true,
-        "optionName": ["color", "size"],
-        "option": {
-          "color": ["Black", "Ivory", "Navy"],
-          "size": {
-            "small": [
-              { "totalLength": 58 },
-              { "sholderWidth": 42 },
-              { "chestWidth": 50 },
-              { "sleeveLength": 62 },
-              { "hemWidth": 22 }
-            ],
-            "medium": [
-              { "totalLength": 60 },
-              { "sholderWidth": 44 },
-              { "chestWidth": 52 },
-              { "sleeveLength": 64 },
-              { "hemWidth": 24 }
-            ],
-            "large": [
-              { "totalLength": 62 },
-              { "sholderWidth": 42 },
-              { "chestWidth": 54 },
-              { "sleeveLength": 66 },
-              { "hemWidth": 26 }
-            ]
-          }
+        "totalLike": 128,
+        "options": { "color": ["Black", "White", "Grey"], "size": ["Small", "Medium", "Large"] },
+        "store": {
+          "companyName": "다애스토어"
         }
-      }
-    ]
-  },
-
-  "review": {
-    "status": 1,
-    "data": [
-      {
-        "ownerName": "daaeaad",
-        "createdAt": "2022-01-28 22:33:44",
-        "modifiedAt": "",
-        "title": "옷이 너무 마음에 들어요.",
-        "content": "옷이 너무 예뻐요! 지금 같이 추울 때 입기 딱 좋은 두께감 입니다. 도톰한 두께에 비해 핏이 부해보이지 않습니다. 요즘 너무 자주 입는 옷이에요.",
-        "img": [
-          "https://i.picsum.photos/id/1062/5092/3395.jpg?hmac=o9m7qeU51uOLfXvepXcTrk2ZPiSBJEkiiOp-Qvxja-k"
-        ],
-        "rating": 4,
-        "optionInfo": "[COLOR] Black, [SIZE] Small"
       },
       {
-        "ownerName": "daaeaad2",
-        "createdAt": "2022-01-28 22:33:44",
-        "modifiedAt": "2022-01-30 22:33:44",
-        "title": "맘에 들어요",
-        "content": "너무 마음에 드네요!",
-        "img": [],
-        "rating": 4,
-        "optionInfo": "[COLOR] Gray, [SIZE] Medium"
+        "id": "p2",
+        "name": "SWEATSHIRT UNIV_NAVY IVORY",
+        "imgMain": [
+          "https://i.picsum.photos/id/1062/5092/3395.jpg?hmac=o9m7qeU51uOLfXvepXcTrk2ZPiSBJEkiiOp-Qvxja-k"
+        ],
+        "originalPrice": 75000,
+        "currentPrice": 71250,
+        "isPossibleOrde": true,
+        "whyOrderNotPossible": "",
+        "totalLike": 133,
+        "options": { "color": [], "size": ["Small", "Medium", "Large"] },
+        "store": {
+          "companyName": "다애마켓"
+        }
+      },
+      {
+        "id": "p3",
+        "name": "ts0307 플리스 후드-베이지",
+        "imgMain": [
+          "https://i.picsum.photos/id/535/2962/3949.jpg?hmac=Cs154XYJYEmSoM-YPHR1Kcp2LDRzxLfKxa67Av3ZIhY"
+        ],
+        "originalPrice": 49700,
+        "currentPrice": 30000,
+        "isPossibleOrde": true,
+        "whyOrderNotPossible": "",
+        "totalLike": 133,
+        "options": { "color": [], "size": [] },
+        "store": {
+          "companyName": "DAAE Store"
+        }
+      },
+      {
+        "id": "p4",
+        "name": "MILAGRO WASHED CREWNECK SWEATSHIRT BLACK",
+        "imgMain": [
+          "https://i.picsum.photos/id/445/4256/2819.jpg?hmac=99qT1IPidZrzaXTgG1ixRRVwElWXUlNepU2k692G44c"
+        ],
+        "originalPrice": 69000,
+        "currentPrice": 35000,
+        "isPossibleOrde": false,
+        "whyOrderNotPossible": "품절",
+        "totalLike": 4000,
+        "options": { "color": [], "size": [] },
+        "store": {
+          "companyName": "DAAE Store"
+        }
       }
     ]
   }
