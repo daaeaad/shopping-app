@@ -19,7 +19,7 @@ describe('상품 대표 이미지', () => {
     expect(wrapper.find('[data-test="itemInfoVisual"]').exists()).toBeTruthy();
   });
 
-  it('data property의 status가 0일 경우, 화면에는 이미지를 불러올 수 없다는 메시지를 띄웁니다.', async () => {
+  it('data option의 status가 0일 경우, 화면에는 이미지를 불러올 수 없다는 메시지를 띄웁니다.', async () => {
     await wrapper.setData({ status: 0 });
 
     // 데이터를 정상적으로 불러왔을 때 영역
@@ -29,7 +29,7 @@ describe('상품 대표 이미지', () => {
     expect(wrapper.find('[data-test="message"]').text()).toBe('이미지를 불러올 수 없습니다.');
   });
 
-  it('data property의 status가 1일 경우, 이미지 태그를 렌더링합니다.', async () => {
+  it('data option의 status가 1일 경우, 이미지 태그를 렌더링합니다.', async () => {
     await wrapper.setData({ status: 1 });
 
     // 데이터를 정상적으로 불러왔을 때 영역
@@ -66,7 +66,7 @@ describe('판매자 정보', () => {
     expect(wrapper.find('[data-test="itemStoreInfo"]').exists()).toBeTruthy();
   });
 
-  it('data property의 status가 0일 경우, 화면에는 판매자 정보를 불러올 수 없다는 메시지를 띄웁니다.', async () => {
+  it('data option의 status가 0일 경우, 화면에는 판매자 정보를 불러올 수 없다는 메시지를 띄웁니다.', async () => {
     await wrapper.setData({ status: 0 });
 
     // 데이터를 정상적으로 불러왔을 때 영역
@@ -81,7 +81,7 @@ describe('판매자 정보', () => {
     );
   });
 
-  it('data property의 status가 1일 경우, 화면에는 판매자 정보를 불러올 영역을 렌더링 합니다.', async () => {
+  it('data option의 status가 1일 경우, 화면에는 판매자 정보를 불러올 영역을 렌더링 합니다.', async () => {
     await wrapper.setData({ status: 1 });
 
     // 데이터를 정상적으로 불러왔을 때 영역
@@ -102,7 +102,7 @@ describe('판매자 정보', () => {
     expect(itemStoreInfo.find('[data-test="tags"]')).toBeTruthy();
   });
 
-  it('판매자의 프로필 이미지 경로는 data property의 product.store.imgProfile 입니다.', async () => {
+  it('판매자의 프로필 이미지 경로는 data option의 product.store.imgProfile 입니다.', async () => {
     const url = 'https://i.picsum.photos/id/1003/1181/1772.jpg?hmac=oN9fHMXiqe9Zq2RM6XT-RVZkojgPnECWwyEF1RvvTZk';
     await wrapper.setData({
       product: {
@@ -113,7 +113,7 @@ describe('판매자 정보', () => {
     expect(wrapper.find('[data-test="imgProfile"]').attributes('src')).toBe(url);
   });
 
-  it('판매자의 상호명은 data property의 product.store.name 입니다.', async () => {
+  it('판매자의 상호명은 data option의 product.store.name 입니다.', async () => {
     const companyName = '다애스토어';
     await wrapper.setData({
       product: {
@@ -124,7 +124,7 @@ describe('판매자 정보', () => {
     expect(wrapper.find('[data-test="companyName"]').text()).toBe(companyName);
   });
 
-  it('판매자의 해시태그는 data property의 product.store.tags 배열의 길이만큼 엘리먼트를 렌더링 합니다.', async () => {
+  it('판매자의 해시태그는 data option의 product.store.tags 배열의 길이만큼 엘리먼트를 렌더링 합니다.', async () => {
     const tags = ['tag1', 'tag2', 'tag3'];
     await wrapper.setData({
       product: {
@@ -150,7 +150,7 @@ describe('상품 기본 정보', () => {
     expect(wrapper.find('[data-test="ItemInfoBasicInfo"]').exists()).toBeTruthy();
   });
 
-  it('data property의 status가 0이면, 가격 정보를 불러올 수 없다는 메시지를 화면에 띄웁니다.', async () => {
+  it('data option의 status가 0이면, 가격 정보를 불러올 수 없다는 메시지를 화면에 띄웁니다.', async () => {
     await wrapper.setData({ status: 0 });
 
     // 데이터를 정상적으로 불러왔을 때 영역
@@ -160,7 +160,7 @@ describe('상품 기본 정보', () => {
     expect(wrapper.find('[data-test="ItemInfoBasicInfo_0"]').exists()).toBeTruthy();
   });
 
-  it('data property의 status가 1이면, 정보를 불러올 영역을 렌더링 합니다.', async () => {
+  it('data option의 status가 1이면, 정보를 불러올 영역을 렌더링 합니다.', async () => {
     await wrapper.setData({ status: 1 });
 
     // 데이터를 정상적으로 불러왔을 때 영역
@@ -179,14 +179,14 @@ describe('상품 기본 정보', () => {
     expect(itemStoreInfo.find('[data-test="price"]')).toBeTruthy();
   });
 
-  it('상품명은 data property의 product.name을 화면에 출력합니다.', async () => {
+  it('상품명은 data option의 product.name을 화면에 출력합니다.', async () => {
     const name = '따뜻한 니트';
     await wrapper.setData({ product: { name } });
 
     expect(wrapper.find('[data-test="pname"]').text()).toBe(name);
   });
 
-  it('주문이 불가능한 상태이면, 가격 대신 주문이 불가능하다는 메시지를 띄울 영역을 렌더링하고 data property의 product.whyOrderNotPossible을 화면에 출력 합니다.', async () => {
+  it('주문이 불가능한 상태이면, 가격 대신 주문이 불가능하다는 메시지를 띄울 영역을 렌더링하고 data option의 product.whyOrderNotPossible을 화면에 출력 합니다.', async () => {
     const whyOrderNotPossible = '품절';
     await wrapper.setData({ product: { isPossibleOrder: false, whyOrderNotPossible } });
 
@@ -199,7 +199,7 @@ describe('상품 기본 정보', () => {
     ).toBe(whyOrderNotPossible);
   });
 
-  it('상품의 현재 가격은 data property의 product.currentPrice를 3자리마다 콤마를 찍어 출력합니다.', async () => {
+  it('상품의 현재 가격은 data option의 product.currentPrice를 3자리마다 콤마를 찍어 출력합니다.', async () => {
     const currentPrice = 10000;
     await wrapper.setData({ product: { originalPrice: 20000, currentPrice } });
 
@@ -222,7 +222,7 @@ describe('상품 기본 정보', () => {
     expect(wrapper.find('[data-test="discountPercent"]').exists()).toBeTruthy();
   });
 
-  it('할인 중이면, 상품의 원래 가격으로 data property의 product.originalPrice를 3자리마다 콤마를 찍어 출력합니다.', async () => {
+  it('할인 중이면, 상품의 원래 가격으로 data option의 product.originalPrice를 3자리마다 콤마를 찍어 출력합니다.', async () => {
     const originalPrice = 10000;
     await wrapper.setData({ product: { originalPrice, currentPrice: 8000 } });
 
@@ -259,7 +259,7 @@ describe('상품 상세 설명', () => {
     expect(wrapper.find('[data-test="itemInfoDetail"]').exists()).toBeTruthy();
   });
 
-  it('data property의 status가 0이면, 상품 설명을 불러올 수 없다는 메시지를 화면에 출력합니다.', async () => {
+  it('data option의 status가 0이면, 상품 설명을 불러올 수 없다는 메시지를 화면에 출력합니다.', async () => {
     await wrapper.setData({ status: 0 });
 
     // 데이터를 정상적으로 불러왔을 때 영역
@@ -273,7 +273,7 @@ describe('상품 상세 설명', () => {
     ).toBe('상품 설명을 불러올 수 없습니다.');
   });
 
-  it('data property의 status가 1이면, 상품 설명을 불러올 영역을 렌더링 합니다.', async () => {
+  it('data option의 status가 1이면, 상품 설명을 불러올 영역을 렌더링 합니다.', async () => {
     await wrapper.setData({ status: 1 });
 
     // 데이터를 정상적으로 불러왔을 때 영역
@@ -283,7 +283,7 @@ describe('상품 상세 설명', () => {
     expect(wrapper.find('[data-test="itemInfoDetail_0"]').exists()).toBeFalsy();
   });
 
-  it('상품의 상세 설명은 data property의 product.description을 html 형식으로 렌더링 합니다.', async () => {
+  it('상품의 상세 설명은 data option의 product.description을 html 형식으로 렌더링 합니다.', async () => {
     const description = '<p>상세 설명 입니다.</p>';
     await wrapper.setData({ product: { description } });
 
@@ -303,7 +303,7 @@ describe('리뷰', () => {
     expect(wrapper.find('[data-test="itemInfoReview"]').exists()).toBeTruthy();
   });
 
-  it('data property의 status가 0이면, 리뷰를 불러올 수 없다는 메시지를 화면에 출력합니다.', async () => {
+  it('data option의 status가 0이면, 리뷰를 불러올 수 없다는 메시지를 화면에 출력합니다.', async () => {
     await wrapper.setData({ status: 0 });
 
     // 데이터를 정상적으로 불러왔을 때 영역
@@ -317,7 +317,7 @@ describe('리뷰', () => {
     ).toBe('리뷰를 불러올 수 없습니다.새로고침을 하거나 고객센터에 문의해주세요.');
   });
 
-  it('data property의 status가 1이면, 리뷰 리스트를 불러올 영역을 렌더링 합니다.', async () => {
+  it('data option의 status가 1이면, 리뷰 리스트를 불러올 영역을 렌더링 합니다.', async () => {
     await wrapper.setData({ status: 1 });
 
     // 데이터를 정상적으로 불러왔을 때 영역
@@ -345,7 +345,7 @@ describe('리뷰', () => {
     );
   });
 
-  it('리뷰가 있으면, data property의 product.review 배열의 길이만큼 엘리먼트를 렌더링 합니다.', async () => {
+  it('리뷰가 있으면, data option의 product.review 배열의 길이만큼 엘리먼트를 렌더링 합니다.', async () => {
     const review = [
       {
         ownerName: 'test1',
@@ -425,7 +425,7 @@ describe('리뷰 내용', () => {
     wrapper.setData({ product: { review } });
   });
 
-  it('리뷰에는 작성자, 구매한 옵션 정보, 본문 텍스트 내용이 있고, data property의 product.review 에서 해당 데이터를 렌더링 합니다.', async () => {
+  it('리뷰에는 작성자, 구매한 옵션 정보, 본문 텍스트 내용이 있고, data option의 product.review 에서 해당 데이터를 렌더링 합니다.', async () => {
     // 작성자
     const ownerName = wrapper.findAll('[data-test="ownerName"]');
 
@@ -476,7 +476,7 @@ describe('화면 하단 고정 버튼', () => {
     expect(wrapper.find('[data-test="itemInfoButton"]')).toBeTruthy();
   });
 
-  it('data property의 status가 0일 경우, 버튼에 상품 정보를 불러오지 못했다는 메시지를 띄웁니다.', async () => {
+  it('data option의 status가 0일 경우, 버튼에 상품 정보를 불러오지 못했다는 메시지를 띄웁니다.', async () => {
     await wrapper.setData({ status: 0 });
 
     // 데이터를 정상적으로 불러왔을 때 영역
@@ -493,7 +493,7 @@ describe('화면 하단 고정 버튼', () => {
     );
   });
 
-  it('data property의 status가 1이면, 찜 버튼과 구매 버튼을 렌더링 합니다.', async () => {
+  it('data option의 status가 1이면, 찜 버튼과 구매 버튼을 렌더링 합니다.', async () => {
     await wrapper.setData({ status: 1 });
 
     // 데이터를 정상적으로 불러왔을 때 영역
