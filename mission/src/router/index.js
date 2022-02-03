@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import ItemListPage from '@/views/ItemList.vue';
+import ItemInfo from '@/views/ItemInfo.vue';
 
 const routes = [
   {
@@ -14,6 +15,13 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+  },
+
+  // 상품 상세 페이지
+  {
+    path: '/item/:id',
+    name: 'ItemDetail',
+    component: ItemInfo,
   },
 ];
 
