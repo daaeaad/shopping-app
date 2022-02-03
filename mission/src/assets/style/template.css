@@ -454,3 +454,11 @@ button.btn {
   top: 47%;
   text-align: center;
 }
+
+.txt_overflow_1 {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
