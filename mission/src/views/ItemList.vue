@@ -13,8 +13,8 @@
   >
     <!-- 데이터를 불러오지 못했을 때 { -->
     <div v-if="!products" class="flex align_center justify_center">
-      <div class="position_abosol center">
-        <p class="txt size_14">
+      <div class="position_absolute center">
+        <p class="txt size_14 color_98 line_height_15">
           목록을 불러오지 못했습니다.
           <br />
           새로고침을 하거나 고객센터에 문의해주세요.
@@ -27,13 +27,21 @@
     <div v-if="products">
       <ul class="lay_1 flex row wrap">
         <template v-if="!products.length">
-          <div class="position_abosol center">
-            <p class="txt size_14">목록이 존재하지 않습니다.</p>
+          <div class="position_absolute center">
+            <p class="txt size_14 color_98 line_height_15">목록이 존재하지 않습니다.</p>
           </div>
         </template>
         <!-- 반복 { -->
         <li class="lay_2_1" v-for="product in products" :key="product.id">
-          <ItemListItem :product="product" :likeProduct="likeProduct" />
+          <ItemListItem
+            :product_no="product.product_no"
+            :image="product.image"
+            :name="product.name"
+            :original_price="product.original_price"
+            :price="product.price"
+            :description="product.description"
+            :isLike="isLike(wish, product.product_no)"
+          />
         </li>
         <!-- } 반복 -->
       </ul>
@@ -50,14 +58,24 @@
 <script>
 import { reactive, toRefs } from 'vue';
 
-import getData from '@/composable/getData';
+// composable
 import getHeaderHeight from '@/composable/getHeaderHeight';
 import getFooterHeight from '@/composable/getFooterHeight';
 import getScrollInfo from '@/composable/getScrollInfo';
+import { isLike } from '@/composable/handleWish';
 
+// component
 import ItemListItem from '@/components/ItemList/ItemListItem.vue';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
+
+// repository
+import Repository from '@/repositories/RepositoryFactory';
+
+// repository - item
+const ItemRepository = Repository.get('item');
+// repository - wish
+const WishRepository = Repository.get('wish');
 
 export default {
   name: 'ItemListPage',
@@ -67,15 +85,18 @@ export default {
     // data
     const state = reactive({
       products: [],
-      likeProduct: ['p1', 'p4'],
-      loggedUser: {},
+      wish: [],
     });
 
-    // state에 json data를 할당
+    // state에 data 할당
     (async () => {
-      state.products = await getData('productList');
-      state.loggedUser = await getData('loggedUser');
-      // console.log(state.loggedUser.likeProduct);
+      const repoDataList = await ItemRepository.getList();
+      state.products = repoDataList;
+
+      const repoDataWish = await WishRepository.getList();
+      state.wish = repoDataWish;
+      console.log('repoDataWish :: ', repoDataWish);
+      console.log('state.wish :: ', state.wish);
     })();
 
     // 스크롤 위치
@@ -91,6 +112,7 @@ export default {
       isScrollDown,
       headerHeight,
       footerHeight,
+      isLike,
       ...toRefs(state),
     };
   },
