@@ -4,7 +4,13 @@
       <!-- 좌측 { -->
       <div class="left position_absolute">
         <div class="inner flex row align_center">
-          <button></button>
+          <!-- 버튼: 뒤로가기 -->
+          <template v-if="btn === 'back'">
+            <button @click="$router.go(-1)">
+              <icon name="arrow-left" class="ico heart_line" height="20" color="#666" />
+            </button>
+          </template>
+          <!-- / 버튼: 뒤로가기 -->
         </div>
       </div>
       <!-- } 좌측 끝 -->
@@ -29,6 +35,12 @@
 <script>
 export default {
   name: 'Header',
+  props: {
+    btn: {
+      type: String,
+      default: '',
+    },
+  },
 };
 </script>
 
