@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { useRoute } from 'vue-router';
 import ItemInfoPage from '@/views/ItemInfo.vue';
 import Client from '@/repositories/Clients/AxiosClient';
@@ -15,6 +15,7 @@ jest.mock('@/repositories/Clients/AxiosClient');
 describe('ItemInfoPage', () => {
   /* component setting { */
   const id = 'aa11';
+
   const item = {
     name: '회색가디건',
     image: 'imgurl',
@@ -49,18 +50,17 @@ describe('ItemInfoPage', () => {
     },
   };
   let wrapper;
-  beforeEach(() => {
+  beforeEach(async () => {
     // set params
-    useRoute.mockImplementationOnce(() => ({
+    await Client.get.mockImplementation(() => res);
+    await useRoute.mockImplementationOnce(() => ({
       params: {
         id,
       },
     }));
 
-    Client.get.mockImplementation(() => res);
-
-    // mount component
-    wrapper = mount(ItemInfoPage);
+    // shallowMount component
+    wrapper = shallowMount(ItemInfoPage);
   });
   /* } component setting 끝 */
 

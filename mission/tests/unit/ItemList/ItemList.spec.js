@@ -1,22 +1,29 @@
-import { mount } from '@vue/test-utils';
-import ItemInfoPage from '@/views/ItemList.vue';
+import { shallowMount } from '@vue/test-utils';
+import { useRoute } from 'vue-router';
+import ItemListPage from '@/views/ItemList.vue';
 import Repository from '@/repositories/RepositoryFactory';
 import Client from '@/repositories/Clients/AxiosClient';
+
+jest.mock('vue-router', () => ({
+  useRoute: jest.fn(),
+}));
 
 // axios mocking
 jest.mock('@/repositories/Clients/AxiosClient');
 
 describe('ItemListPage', () => {
   let wrapper;
-  beforeEach(() => {
+
+  beforeEach(async () => {
     const items = [{ id: 123 }, { id: 456 }];
     const res = {
       data: {
         items,
       },
     };
-    Client.get.mockImplementation(() => res);
-    wrapper = mount(ItemInfoPage);
+    await Client.get.mockImplementation(() => res);
+
+    wrapper = shallowMount(ItemListPage);
   });
 
   it('redners ItemListPage', () => {
@@ -41,7 +48,6 @@ describe('ItemListPage', () => {
 });
 
 /* Repository Test { */
-
 describe('api 호출 테스트', () => {
   it('상품 목록 data', async () => {
     // setup
