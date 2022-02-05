@@ -333,9 +333,9 @@
 import {
   computed, reactive, ref, toRefs,
 } from 'vue';
+import { useRoute } from 'vue-router';
 
 // component
-import { useRoute } from 'vue-router';
 import Header from '@/components/Header.vue';
 
 // api respository
