@@ -230,6 +230,9 @@ button.btn {
 .weight_b {
   font-weight: var(--weight_b);
 }
+.weight_eb {
+  font-weight: var(--weight_eb);
+}
 
 .align_center {
   text-align: center;
@@ -294,6 +297,10 @@ button.btn {
 .lay_2_1 {
   width: 50%;
   height: auto;
+}
+
+.height_100 {
+  height: 100%;
 }
 
 .padding_10 {
@@ -422,11 +429,13 @@ button.btn {
   height: auto;
   padding: 0;
 }
-.item-list-item .btn_like {
+.item-list-item .btn_like,
+.btn_like {
   width: var(--px_36);
   height: var(--px_36);
 }
-.item-list-item .btn_like .ico {
+.item-list-item .btn_like .ico,
+.btn_like .ico {
   width: 60%;
   height: auto;
   position: absolute;
@@ -435,18 +444,23 @@ button.btn {
   right: 10px;
   transition: 0.1s;
 }
-.item-list-item .btn_like .ico.heart_line {
+.item-list-item .btn_like .ico.heart_line,
+.btn_like .ico.heart_line {
   z-index: 11;
   color: #fff;
 }
-.item-list-item .btn_like .ico.heart_fill {
-  color: rgba(0, 0, 0, 0.2);
+.item-list-item .btn_like .ico.heart_fill,
+.btn_like .ico.heart_fill {
+  color: rgba(99, 86, 86, 0.2);
 }
-.item-list-item .btn_like .ico.heart_fill path {
+.item-list-item .btn_like .ico.heart_fill path,
+.btn_like .ico.heart_fill path {
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
 }
 .item-list-item .btn_like.act .ico.heart_line,
-.item-list-item .btn_like.act .ico.heart_fill {
+.item-list-item .btn_like.act .ico.heart_fill,
+.btn_like.act .ico.heart_line,
+.btn_like.act .ico.heart_fill {
   color: #ff5f5f;
 }
 
