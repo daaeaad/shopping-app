@@ -13,6 +13,6 @@ export default {
   },
   // 상세
   getDetail(id) {
-    return getData(`${resource}/${id}`, depth);
+    return getData(`${resource}/${id}`, 'item');
   },
 };

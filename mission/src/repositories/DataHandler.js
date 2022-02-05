@@ -9,7 +9,7 @@ export const getData = async (req, depth = '') => {
   try {
     const res = await Client.get(req);
     if (!depth) {
-      result = res.data;
+      result = res;
     } else {
       result = res.data[`${depth}`];
     }
