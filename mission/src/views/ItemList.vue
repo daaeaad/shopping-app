@@ -27,7 +27,7 @@
     <div v-if="products">
       <ul class="lay_1 flex row wrap">
         <template v-if="!products.length">
-          <div class="position_absolute center">
+          <div class="position_absolute center lay_1">
             <p class="txt size_14 color_98 line_height_15">목록이 존재하지 않습니다.</p>
           </div>
         </template>
@@ -51,12 +51,13 @@
   <!-- } 목록 -->
 
   <!-- Nav(풋터) { -->
-  <Footer />
+  <Footer :nav="true" />
   <!-- } Nav(풋터) 끝 -->
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue';
+import { reactive, toRefs, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 // composable
 import getHeaderHeight from '@/composable/getHeaderHeight';
@@ -88,15 +89,41 @@ export default {
       wish: [],
     });
 
+    const route = useRoute();
+
     // state에 data 할당
     (async () => {
-      const repoDataList = await ItemRepository.getList();
-      state.products = repoDataList;
+      try {
+        // 전체 상품 목록
+        const repoDataList = await ItemRepository.getList();
+        // 찜한 상품 목록
+        const repoDataWish = await WishRepository.getList();
 
-      const repoDataWish = await WishRepository.getList();
-      state.wish = repoDataWish;
-      console.log('repoDataWish :: ', repoDataWish);
-      console.log('state.wish :: ', state.wish);
+        state.wish = repoDataWish;
+
+        // route path에 따라 데이터 바꾸기
+        const toggleListData = () => {
+          if (route.path === '/wish') {
+            // wish list page면 찜 목록
+            state.products = repoDataWish;
+          } else {
+            // home page면 전체 목록
+            state.products = repoDataList;
+          }
+        };
+        // 컴포넌트 생성시 바로 실행
+        toggleListData();
+
+        // route path 변경 감지해서 데이터 바꾸기
+        watch(
+          () => route.path,
+          () => {
+            toggleListData();
+          },
+        );
+      } catch (err) {
+        console.log(err);
+      }
     })();
 
     // 스크롤 위치
