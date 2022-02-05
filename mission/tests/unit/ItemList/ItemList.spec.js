@@ -1,12 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import { useRoute } from 'vue-router';
 import ItemListPage from '@/views/ItemList.vue';
 import Repository from '@/repositories/RepositoryFactory';
 import Client from '@/repositories/Clients/AxiosClient';
-
-jest.mock('vue-router', () => ({
-  useRoute: jest.fn(),
-}));
 
 // axios mocking
 jest.mock('@/repositories/Clients/AxiosClient');
