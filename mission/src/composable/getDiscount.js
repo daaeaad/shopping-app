@@ -2,8 +2,16 @@ import { computed } from 'vue';
 
 /* 할인율 계산 { */
 const getDiscount = (originalPrice, currentPrice) => {
+  // console.log('originalPrice :: ', originalPrice);
+  // console.log('currentPrice :: ', currentPrice);
+
   // 할인 여부 확인하기
-  const isDiscount = computed(() => originalPrice !== currentPrice);
+  let isDiscount;
+  if (!originalPrice) {
+    isDiscount = false;
+  } else {
+    isDiscount = computed(() => originalPrice !== currentPrice);
+  }
 
   // 할인율 계산
   const discountPercent = computed(() => {

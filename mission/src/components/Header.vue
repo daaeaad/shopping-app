@@ -4,14 +4,25 @@
       <!-- 좌측 { -->
       <div class="left position_absolute">
         <div class="inner flex row align_center">
-          <button></button>
+          <!-- 버튼: 뒤로가기 -->
+          <template v-if="btn === 'back'">
+            <button @click="$router.go(-1)">
+              <icon name="arrow-left" class="ico heart_line" height="20" color="#666" />
+            </button>
+          </template>
+          <!-- / 버튼: 뒤로가기 -->
         </div>
       </div>
       <!-- } 좌측 끝 -->
 
       <!-- 헤더 중앙 -->
       <div class="center">
-        <h1 class="logo"><img src="@/assets/images/logo/logo.png" alt="" /></h1>
+        <template v-if="!title">
+          <h1 class="logo"><img src="@/assets/images/logo/logo.png" alt="logo" /></h1>
+        </template>
+        <template v-else>
+          <h1 class="txt size_16 color_black weight_eb">{{ title }}</h1>
+        </template>
       </div>
       <!-- } 헤더 중앙 끝 -->
 
@@ -29,6 +40,16 @@
 <script>
 export default {
   name: 'Header',
+  props: {
+    btn: {
+      type: String,
+      default: '',
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+  },
 };
 </script>
 

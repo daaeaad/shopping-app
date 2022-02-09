@@ -1,6 +1,4 @@
-import {
-  onMounted, onBeforeUnmount, nextTick, ref,
-} from 'vue';
+import { onMounted, nextTick, ref } from 'vue';
 
 /* 풋터 높이 확인하기 { */
 const getFooterHeight = () => {
@@ -14,15 +12,14 @@ const getFooterHeight = () => {
 
   // 렌더링이 다 되고 나면,
   onMounted(async () => {
-    await nextTick(() => {
-      // 윈도우 로드가 되고 #footer 높이 업데이트
-      window.addEventListener('load', updateFooterHeight);
-    });
-  });
-
-  onBeforeUnmount(() => {
-    // 윈도우 로드가 되고 #footer 높이 업데이트
-    window.removeEventListener('load', updateFooterHeight);
+    try {
+      // #footer 높이 업데이트
+      await nextTick(() => {
+        updateFooterHeight();
+      });
+    } catch (err) {
+      console.log(err);
+    }
   });
 
   return {
