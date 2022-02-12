@@ -3,6 +3,36 @@
     <template v-if="nav">
       <Nav />
     </template>
+
+    <template v-if="btn">
+      <div class="footer_btn">
+        <div data-test="" class="flex row align_center lay_1">
+          <!-- 버튼: 주문하기 -->
+          <button
+            v-if="orderBtn"
+            type="button"
+            data-test="btnPurchase"
+            class="lay_1"
+            @click="$emit('goOrder')"
+          >
+            <p class="txt size_14 weight_b color_white lay_1">
+              <!-- 텍스트 -->
+              {{ btnContent }}
+            </p>
+          </button>
+          <!-- / 버튼: 주문하기 -->
+
+          <!-- 버튼: 결제하기 -->
+          <button v-else type="button" data-test="btnPurchase" class="lay_1">
+            <p class="txt size_14 weight_b color_white lay_1">
+              <!-- 텍스트 -->
+              {{ btnContent }}
+            </p>
+          </button>
+          <!-- / 버튼: 결제하기 -->
+        </div>
+      </div>
+    </template>
   </footer>
 </template>
 
@@ -16,6 +46,18 @@ export default {
     nav: {
       type: Boolean,
       default: false,
+    },
+    btn: {
+      type: Boolean,
+      default: false,
+    },
+    orderBtn: {
+      type: Boolean,
+      default: false,
+    },
+    btnContent: {
+      type: String,
+      default: '',
     },
   },
 };
@@ -60,5 +102,12 @@ export default {
 #nav .menu.act .txt {
   color: #222;
   font-weight: 700;
+}
+
+.footer_btn {
+  background-color: #222;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
 }
 </style>
