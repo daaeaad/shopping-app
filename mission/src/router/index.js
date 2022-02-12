@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
+
 import NotFoundPage from '@/views/NotFound.vue';
 import ItemListPage from '@/views/ItemList.vue';
 import ItemInfo from '@/views/ItemInfo.vue';
 import CartList from '@/views/CartList.vue';
 import MyInfo from '@/views/MyInfo.vue';
+import Order from '@/views/Order.vue';
 
 const routes = [
   // redirect to 404
@@ -54,6 +56,17 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: CartList,
+  },
+
+  // 주문하기
+  {
+    path: '/order',
+    name: 'Order',
+    component: Order,
+    beforeEnter: (to, from) => {
+      const prevRoute = !from.name ? '' : from.name;
+      to.params.prevRoute = prevRoute; // eslint-disable-line
+    },
   },
 
   // 마이페이지
