@@ -313,7 +313,7 @@
           <div class="line verti"></div>
 
           <!-- 버튼: 구매하기 -->
-          <button type="button" data-test="btnPurchase" class="lay_1">
+          <button type="button" data-test="btnPurchase" class="lay_1" @click="goOrder()">
             <p class="txt size_14 weight_b color_white lay_1">
               <!-- 현재 가격과 구매하기 텍스트 -->
               {{ currentPrice }}원 구매하기
@@ -333,7 +333,8 @@
 import {
   computed, reactive, ref, toRefs,
 } from 'vue';
-import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+import { useRoute, useRouter } from 'vue-router';
 
 // component
 import Header from '@/components/Header.vue';
@@ -427,6 +428,18 @@ export default {
       }
     };
 
+    // 주문하기 페이지로 이동
+    const store = useStore();
+    const router = useRouter();
+    const goOrder = () => {
+      const product = [{ product_no: id, quantity: 1 }];
+      store.dispatch('handleOrderList', { product });
+
+      router.push({
+        name: 'Order',
+      });
+    };
+
     // data
     return {
       ...toRefs(state),
@@ -436,6 +449,7 @@ export default {
       headerHeight,
       scrollPosition,
       isScrollDown,
+      goOrder,
     };
   },
 };
