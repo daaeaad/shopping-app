@@ -1,6 +1,8 @@
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { useRouter } from 'vue-router';
+import { createStore } from 'vuex';
 import ItemListItem from '@/components/ItemList/ItemListItem.vue';
+import realStore from '@/store';
 
 describe('ItemListItem', () => {
   const product = {
@@ -10,13 +12,23 @@ describe('ItemListItem', () => {
     original_price: 10000,
     price: 8000,
     description: '가나다라',
+
+    isCartList: false,
+    isOrderList: false,
+    totalPrice: 0,
+    quantity: 0,
   };
 
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(ItemListItem, {
+    wrapper = shallowMount(ItemListItem, {
       props: product,
+      global: {
+        provide: {
+          store: realStore,
+        },
+      },
     });
   });
 
@@ -108,7 +120,13 @@ describe('router test', () => {
 
     const productNo = '1111';
     const calledData = { name: 'ItemDetail', params: { id: productNo } };
-    const wrapper = mount(ItemListItem);
+    const wrapper = shallowMount(ItemListItem, {
+      global: {
+        provide: {
+          store: realStore,
+        },
+      },
+    });
     await wrapper.setProps({ product_no: productNo });
 
     // act 1
@@ -126,4 +144,189 @@ describe('router test', () => {
     expect(push).toHaveBeenCalledWith(calledData);
   });
 });
-/* } router test 끝 */
+
+/* store setting { */
+const createVuexStore = (fakeState, fakeGetters, fakeActions, fakeMutations) => createStore({
+  state() {
+    return fakeState;
+  },
+  mutations: fakeMutations,
+  actions: fakeActions,
+  getters: fakeGetters,
+});
+
+const makeWrapper = (store, props) => shallowMount(ItemListItem, {
+  props,
+  global: {
+    plugins: [store],
+  },
+});
+
+const products = [
+  {
+    product_no: '1111',
+    name: '잠옷',
+    image: 'img url',
+    price: 10000,
+    description: '잠이 잘 오는 잠옷',
+  },
+  {
+    product_no: '2222',
+    name: '니트',
+    image: 'img url2',
+    price: 20000,
+    description: '따뜻',
+  },
+  {
+    product_no: '3333',
+    name: '슬랙스',
+    image: 'img url3',
+    price: 50000,
+    description: '검정색',
+  },
+  {
+    product_no: '4444',
+    name: '롱패딩',
+    image: 'img url4',
+    price: 280000,
+    description: '흰색',
+  },
+];
+
+// 체크된 장바구니 상품 id
+const getCheckedId = (state) => {
+  const checkedCarts = state.carts.filter((cart) => cart.checked);
+
+  const result = checkedCarts.map((cart) => cart.product_no);
+
+  return result;
+};
+
+// 체크된 장바구니 상품 목록
+const getCheckedCartItem = (state, getters) => {
+  const result = getters.getCheckedId.map((checkedCart) => {
+    const carts = getters.getCartItem.find((cart) => cart.product_no === checkedCart);
+
+    return carts;
+  });
+
+  return result;
+};
+
+const deleteCart = ({ state, commit }, { id }) => {
+  if (id === 'all') {
+    commit('deleteAllItem');
+  } else {
+    const item = state.carts.find((cart) => cart.product_no === id);
+    if (item) {
+      commit('deleteItem', { id });
+    }
+  }
+};
+
+const deleteItem = (state, { id }) => {
+  const newCarts = state.carts.filter((cart) => cart.product_no !== id);
+  state.carts = newCarts;
+};
+/* } store setting */
+
+describe('장바구니 목록', () => {
+  let fakeState;
+  let fakeGetters;
+  let fakeActions;
+  let fakeMutations;
+  let store;
+  let wrapper;
+
+  const product = {
+    isCartList: true,
+    isOrderList: false,
+    product_no: 'p1234',
+    image: 'image url',
+    name: '가디건',
+    original_price: 10000,
+    price: 8000,
+    description: '회색',
+    quantity: 3,
+    totalPrice: 24000,
+  };
+
+  beforeEach(() => {
+    fakeState = {
+      carts: [
+        {
+          product_no: 'p1234',
+          quantity: 3,
+          checked: true,
+        },
+      ],
+      products,
+    };
+
+    fakeGetters = {
+      getCheckedId,
+      getCheckedCartItem,
+    };
+
+    fakeActions = {
+      deleteCart,
+    };
+
+    fakeMutations = {
+      deleteItem,
+    };
+
+    store = createVuexStore(fakeState, fakeGetters, fakeActions, fakeMutations);
+    wrapper = makeWrapper(store, product);
+  });
+
+  it('장바구니 목록일때, 상단에 체크박스와 삭제버튼이 렌더링 된다.', () => {
+    expect(wrapper.find('[data-test="cartButtons"]').exists()).toBeTruthy();
+    expect(wrapper.find('[data-test="cartCheckbox"]').exists()).toBeTruthy();
+    expect(wrapper.find('[data-test="cartDeleteBtn"]').exists()).toBeTruthy();
+  });
+
+  it('체크박스는 처음 렌더링 되었을때 체크된 상태이다.', () => {
+    const checkbox = wrapper.find('[data-test="cartCheckbox"]');
+
+    expect(checkbox.element.checked).toBeTruthy();
+  });
+
+  it('체크박스를 클릭하면 체크가 해제된다.', async () => {
+    const checkbox = wrapper.find('[data-test="cartCheckbox"]');
+
+    await checkbox.trigger('click');
+
+    expect(checkbox.element.checked).toBeFalsy();
+  });
+
+  it('수량 증가 버튼을 클릭할때 1씩 증가한다.', async () => {
+    const btnIncrement = wrapper.find('[data-test="btnIncrement"]');
+    const quantityTxt = wrapper.find('[data-test="inputQuantity"]');
+    const { quantity } = fakeState.carts[0];
+
+    expect(quantityTxt.exists()).toBeTruthy();
+    expect(btnIncrement.exists()).toBeTruthy();
+
+    expect(quantityTxt.element.value).toBe(String(quantity));
+
+    await btnIncrement.trigger('click');
+
+    expect(quantityTxt.element.value).toBe(String(quantity + 1));
+  });
+
+  it('수량 감소 버튼을 클릭할때 1씩 감소한다.', async () => {
+    const btnDecrement = wrapper.find('[data-test="btnDecrement"]');
+    const quantityTxt = wrapper.find('[data-test="inputQuantity"]');
+    const { quantity } = fakeState.carts[0];
+
+    expect(quantityTxt.exists()).toBeTruthy();
+    expect(btnDecrement.exists()).toBeTruthy();
+
+    expect(quantityTxt.element.value).toBe(String(quantity));
+
+    await btnDecrement.trigger('click');
+
+    expect(quantityTxt.element.value).toBe(String(quantity - 1));
+  });
+});
