@@ -3,11 +3,17 @@ import Client from '@/repositories/Clients/AxiosClient';
 // GET
 // req: api url
 // depth: data object key name
-export const getData = async (req, depth = '') => {
+export const getData = async (req, depth = '', params = {}) => {
   let result;
 
   try {
-    const res = await Client.get(req);
+    let res;
+    if (!params) {
+      res = await Client.get(req);
+    } else {
+      res = await Client.get(req, { params });
+    }
+
     if (!depth) {
       result = res;
     } else {

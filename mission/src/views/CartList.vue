@@ -164,9 +164,9 @@ export default {
     const store = useStore();
     const router = useRouter();
     const goOrder = () => {
-      const product = store.getters.getCheckedIdAndQuantity;
+      const product = store.getters['cartModule/getCheckedCartItem'];
 
-      store.dispatch('handleOrderList', { product });
+      store.dispatch('orderModule/handleOrderList', { product });
 
       router.push({
         name: 'Order',

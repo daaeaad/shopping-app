@@ -1,60 +1,80 @@
-import { createStore } from 'vuex';
-import cartModule from './modules/cartModule';
-import orderModule from './modules/orderModule';
-import userModule from './modules/userModule';
+import Repository from '@/repositories/RepositoryFactory';
 
-export default createStore({
+const itemRepository = Repository.get('item');
+
+const orderModule = {
+  namespaced: true,
+
   /* ******** state { ******** */
-  state: {
-    // 구매하는 상품
+  state: () => ({
     orders: [],
-  },
+  }),
   /* ******** } state 끝 ******** */
 
   /* ******** mutations { ******** */
   mutations: {
-    setOrderList: (state, { product }) => {
-      state.orders = product;
+    /* 주문할 상품 데이터 불러오기 { */
+    setOrder: (state, items) => {
+      state.orders = items;
+
+      console.log('state.orders :: ', state.orders);
     },
+    /* } 주문할 상품 데이터 불러오기 끝 */
+
+    /* 주문할 상품 데이터 삭제 { */
     deleteAllOrderList: (state) => {
       state.orders = [];
     },
+    /* } 주문할 상품 데이터 삭제 끝 */
   },
   /* ******** } mutations 끝 ******** */
 
   /* ******** actions { ******** */
   actions: {
-    handleOrderList: ({ commit }, { product }) => {
+    /* 주문할 상품 데이터 처리 { */
+    handleOrderList: async ({ commit }, { product }) => {
+      if (!product && !product.length) {
+        alert('오류가 발생하여 구매를 진행할 수 없습니다.'); // eslint-disable-line
+        return;
+      }
+
       if (product === 'delete') {
         commit('deleteAllOrderList');
-      } else {
-        commit('setOrderList', { product });
       }
+
+      const params = await product.map((el) => el.product_no);
+      const itemDatas = await itemRepository.getOrderList(params);
+
+      const result = itemDatas.data.map((itemData) => {
+        const findProduct = product.find((item) => item.product_no === itemData.id);
+
+        return {
+          product_no: findProduct.product_no,
+          name: itemData.name,
+          image: itemData.image,
+          price: itemData.price,
+          original_price: itemData.original_price,
+          description: itemData.description,
+          quantity: findProduct.quantity,
+          total_price: itemData.price * findProduct.quantity,
+        };
+      });
+
+      commit('setOrder', result);
     },
+    /* } 주문할 상품 데이터 처리 끝 */
   },
   /* ******** } actions 끝 ******** */
 
   /* ******** getters { ******** */
   getters: {
-    /* 주문하는 상품 목록 { */
+    /* 주문할 상품 목록 { */
     getOrderItem: (state) => {
-      const result = state.orders.map((order) => {
-        const product = state.products.find((item) => item.product_no === order.product_no);
-        return {
-          product_no: product.product_no,
-          name: product.name,
-          image: product.image,
-          price: product.price,
-          original_price: product.original_price,
-          description: product.description,
-          quantity: order.quantity,
-          total_price: order.quantity * product.price,
-        };
-      });
+      const result = state.orders;
 
       return result;
     },
-    /* } 주문하는 상품 목록 끝 */
+    /* } 주문할 상품 목록 끝 */
 
     /* 주문상품 총 수량 { */
     getOrderTotalCount: (state, getters) => {
@@ -99,22 +119,8 @@ export default createStore({
       return result;
     },
     /* } 주문상품 총 금액 끝 */
-
-    /* 사용자 정보 { */
-    getUser: (state) => {
-      const result = state.user;
-
-      return result;
-    },
-    /* } 사용자 정보 끝 */
   },
   /* ******** } getters 끝 ******** */
+};
 
-  /* ******** modules { ******** */
-  modules: {
-    cartModule,
-    orderModule,
-    userModule,
-  },
-  /* ******** } modules 끝 ******** */
-});
+export default orderModule;

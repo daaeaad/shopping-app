@@ -3,7 +3,16 @@
 </template>
 
 <script>
-export default {};
+import { useStore } from 'vuex';
+
+export default {
+  setup() {
+    const store = useStore();
+
+    store.dispatch('cartModule/setCart');
+    store.dispatch('userModule/setUser');
+  },
+};
 </script>
 
 <style>

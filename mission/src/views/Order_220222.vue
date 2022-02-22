@@ -37,22 +37,21 @@
     <!-- 배송 정보 { -->
     <div class="lay_1 info_box padding_15">
       <TitleItem title="배송 정보" :subTitle="getFullAdress" />
+
       <div class="blank_box_15"></div>
 
-      <!-- 배송지 입력 선택 { -->
       <div class="ck_box_group flex row algin_center">
-        <template v-for="addressBtn in addressBtns" :key="addressBtn.detailValue">
+        <template v-for="rdoBtn in rdoBtns" :key="rdoBtn.detailValue">
           <RadioButton
-            :content="addressBtn.content"
-            :detailValue="addressBtn.value"
-            v-model="selectAddress"
+            :content="rdoBtn.content"
+            :detailValue="rdoBtn.detailValue"
+            v-model="selectAdress"
           />
         </template>
       </div>
-      <!-- } 배송지 입력 선택 끝 -->
 
       <!-- 기존 배송지 { -->
-      <template v-if="selectAddress === 'basic'">
+      <template v-if="selectAdress === 'basic'">
         <ul class="lay_1 input_group">
           <li class="lay_1 flex row align_center">
             <p class="txt size_14 align_left weight_b">
@@ -76,7 +75,7 @@
       <!-- } 기존 배송지 끝 -->
 
       <!-- 신규 입력 { -->
-      <template v-if="selectAddress === 'new'">
+      <template v-if="selectAdress === 'new'">
         <ul class="lay_1 input_group">
           <template v-for="(addressInfo, index) in addressInfos" :key="index">
             <InputItem
@@ -129,13 +128,14 @@
     <!-- 결제 방법 { -->
     <div class="lay_1 info_box padding_15">
       <TitleItem title="결제 방법" />
+
       <div class="blank_box_15"></div>
 
       <div class="ck_box_group flex row algin_center">
-        <template v-for="paymentBtn in paymentBtns" :key="paymentBtn.value">
+        <template v-for="payment in rdoPayments" :key="payment.detailValue">
           <RadioButton
-            :content="paymentBtn.content"
-            :detailValue="paymentBtn.value"
+            :content="payment.content"
+            :detailValue="payment.detailValue"
             v-model="selectPayment"
           />
         </template>
@@ -158,24 +158,25 @@
   <!-- } 목록 -->
 
   <!-- Nav(풋터) { -->
-  <Footer :btn="true" :btnContent="`원 결제하기`" />
+  <Footer :btn="true" :btnContent="`${getAllTotalPrice}원 결제하기`" />
   <!-- } Nav(풋터) 끝 -->
 </template>
 
 <script>
 import {
-  computed, reactive, toRefs, ref,
+  computed, reactive, ref, toRefs,
 } from 'vue';
-import { useStore } from 'vuex';
+// import { useRoute } from 'vue-router';
 
 // component
+import { useStore } from 'vuex';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
-import TitleItem from '@/components/InputGroup/TitleItem.vue';
+import ItemListItem from '@/components/ItemList/ItemListItem.vue';
 import InputItem from '@/components/InputGroup/InputItem.vue';
+import TitleItem from '@/components/InputGroup/TitleItem.vue';
 import RadioButton from '@/components/InputGroup/RadioButton.vue';
 import TextListItem from '@/components/InputGroup/TextListItem.vue';
-import ItemListItem from '@/components/ItemList/ItemListItem.vue';
 
 // composable
 import getHeaderHeight from '@/composable/getHeaderHeight';
@@ -188,14 +189,57 @@ export default {
   components: {
     Header,
     Footer,
-    TitleItem,
+    ItemListItem,
     InputItem,
+    TitleItem,
     RadioButton,
     TextListItem,
-    ItemListItem,
   },
 
   setup() {
+    const state = reactive({
+      rdoBtns: [
+        {
+          content: '기본 배송지',
+          detailValue: 'basic',
+        },
+        {
+          content: '새로운 배송지',
+          detailValue: 'new',
+        },
+      ],
+
+      rdoPayments: [
+        {
+          content: '무통장 입금',
+          detailValue: 'withoutBank',
+        },
+        {
+          content: '카카오페이',
+          detailValue: 'kakaopay',
+        },
+      ],
+
+      addressInfos: [
+        {
+          title: '수령인',
+          type: 'text',
+          value: '',
+        },
+        {
+          title: '연락처',
+          type: 'tel',
+          value: '',
+        },
+        {
+          title: '배송지',
+          type: 'text',
+          value: '',
+          isAddress: true,
+        },
+      ],
+    });
+
     // 스크롤 위치
     const { scrollPosition, isScrollDown } = getScrollInfo();
     // header 높이
@@ -203,93 +247,67 @@ export default {
     // footer 높이
     const { footerHeight } = getFooterHeight();
 
-    const state = reactive({
-      // 입력 배송지 - 기존(basic), 신규(new)
-      selectAddress: 'basic',
-      // 지불방법 - 무통장(withoutBank), 신용카드(creditCard)
-      selectPayment: 'withoutBank',
-    });
+    const selectAdress = ref('basic');
+    const selectPayment = ref('withoutBank');
 
-    // 주문 상품 목록 - 상품 목록, 총 가격, 총 수량
-    const { getAllProducts: products, getAllTotalPrice, getAllTotalCount } = getOrderInfo();
+    // 이전 페이지가 경로 확인 (장바구니인지 아닌지)
+    // const route = useRoute();
+    // const prevRoute = ref('');
+    // prevRoute.value = route.params.prevRoute;
 
-    const store = useStore();
+    // 주문할 상품 목록
+    const { getAllProducts: products, getAllTotalCount, getAllTotalPrice } = getOrderInfo();
+
+    // 주문 상품 목록 초기화
+    // const initOrders = () => {
+    //   store.dispatch('handleOrderList', { product: 'delete' });
+    // }
+
     // 사용자 정보
+    const store = useStore();
+
     const userInfos = computed(() => store.getters['userModule/getUser']);
 
-    // 전화번호 대쉬 추가
-    const getDashedNum = (num) => {
-      let result;
+    console.log('userInfos :: ', store.getters['userModule/getUser'].tel);
 
-      if (!num) {
-        result = '';
-      } else {
-        result = num
-          .match(/\d*/g)
-          .join('')
-          .match(/(\d{0,3})(\d{0,4})(\d{0,4})/)
-          .slice(1)
-          .join('-')
-          .replace(/-*$/g, '');
-      }
+    const getDashedNum = (num = 0) => {
+      const result = num
+        .match(/\d*/g)
+        .join('')
+        .match(/(\d{0,3})(\d{0,4})(\d{0,4})/)
+        .slice(1)
+        .join('-')
+        .replace(/-*$/g, '');
 
       return result;
     };
+    const userTel = computed(() => getDashedNum(store.getters['userModule/getUser'].tel));
 
-    // 사용자 연락처
-    const userTel = computed(() => getDashedNum(userInfos.value.tel));
-
-    // 배송 주소
     const getFullAdress = computed(() => {
-      const { address1, address2, address3 } = userInfos.value.delivery;
+      const { address1, address2, address3 } = store.getters['userModule/getUser'].delivery;
       const result = `(${address1}) ${address2} ${address3}`;
 
       return result;
     });
-
-    // 배송 연락처
-    const userDeliveryTel = computed(() => getDashedNum(userInfos.value.delivery.tel));
-
-    // 배송지 입력 선택
-    const addressBtns = ref([
-      { content: '기본 배송지', value: 'basic' },
-      { content: '새로운 배송지', value: 'new' },
-    ]);
-
-    // 배송지 신규 입력
-    const addressInfos = ref([
-      { title: '수령인', type: 'text', value: '' },
-      { title: '연락처', type: 'tel', value: '' },
-      {
-        title: '배송지',
-        type: 'text',
-        value: '',
-        isAddress: true,
-      },
-    ]);
-
-    // 지불 방법 선택
-    const paymentBtns = ref([
-      { content: '무통장 입금', value: 'withoutBank' },
-      { content: '신용카드', value: 'creditCard' },
-      { content: '카카오페이', value: 'kakaopay' },
-    ]);
+    const userDeliveryTel = computed(() => getDashedNum(store.getters['userModule/getUser'].delivery.tel));
 
     return {
       scrollPosition,
       isScrollDown,
       headerHeight,
       footerHeight,
+      selectAdress,
+      selectPayment,
+
       products,
+      getAllTotalCount,
       getAllTotalPrice,
+
       userInfos,
       userTel,
       getFullAdress,
       userDeliveryTel,
-      addressBtns,
-      addressInfos,
-      paymentBtns,
-      getAllTotalCount,
+
       ...toRefs(state),
     };
   },
