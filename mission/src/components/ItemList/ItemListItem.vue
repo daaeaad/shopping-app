@@ -88,7 +88,7 @@
         <div class="lay_1" v-if="isOrderList">
           <p class="txt size_12 weight_m color_98"></p>
           <p class="txt size_14 weight_m">
-            수량 {{ quantityNum }}개 / <b class="txt size_18 weight_b">{{ getTotalPrice }}</b> 원
+            수량 {{ quantity }}개 / <b class="txt size_18 weight_b">{{ getTotalPrice }}</b> 원
           </p>
         </div>
       </div>
@@ -202,6 +202,7 @@ export default {
       price,
       product_no: productNo,
       totalPrice,
+      quantity,
     } = toRefs(props);
 
     // 할인여부, 할인율
@@ -223,7 +224,7 @@ export default {
 
     // 수량, 수량증가, 수량 감소
     const { quantityNum, incrementQuantity, decrementQuantity } = getCartInfo({
-      quantity: props.quantity,
+      quantity: quantity.value,
       productNo: productNo.value,
     });
 
@@ -239,9 +240,10 @@ export default {
 
     // 주문하기 페이지로 이동
     const store = useStore();
-    const goOrder = () => {
+    const goOrder = async () => {
       const product = [{ product_no: productNo.value, quantity: quantityNum.value }];
-      store.dispatch('handleOrderList', { product });
+
+      await store.dispatch('orderModule/handleOrderList', { product });
 
       router.push({
         name: 'Order',

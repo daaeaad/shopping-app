@@ -5,14 +5,19 @@ const getCartInfo = ({ quantity, productNo, totalPrice }) => {
   const store = useStore();
 
   // 장바구니 전체 상품 목록 가져오기
-  const getAllProducts = computed(() => store.getters.getCartItem);
+  // const getAllProducts = computed(() => store.getters.getCartItem);
+  const getAllProducts = computed(() => store.getters['cartModule/getCartItem']);
 
   // 장바구니 전체 상품 총 수량
-  const getAllTotalCount = computed(() => store.getters.getTotalCount);
+  // const getAllTotalCount = computed(() => store.getters.getTotalCount);
+  const getAllTotalCount = computed(() => store.getters['cartModule/getTotalCount']);
 
   // 장바구니 전체 상품 총 금액
   const getAllTotalPrice = computed(() => {
-    const num = !store.getters.getTotalPrice ? 0 : store.getters.getTotalPrice;
+    // const num = !store.getters.getTotalPrice ? 0 : store.getters.getTotalPrice;
+    const num = !store.getters['cartModule/getTotalPrice']
+      ? 0
+      : store.getters['cartModule/getTotalPrice'];
 
     return num.toLocaleString();
   });
@@ -40,7 +45,8 @@ const getCartInfo = ({ quantity, productNo, totalPrice }) => {
     if (newVal <= 0) {
       quantityNum.value = 1;
     } else {
-      store.dispatch('addCart', { id: productNo, num: newVal });
+      // store.dispatch('addCart', { id: productNo, num: newVal });
+      store.dispatch('cartModule/addCart', { id: productNo, num: newVal });
     }
   });
 
@@ -56,14 +62,16 @@ const getCartInfo = ({ quantity, productNo, totalPrice }) => {
   });
 
   // 체크
-  const checkedItems = ref(store.getters.getCheckedId);
+  const checkedItems = ref(store.getters['cartModule/getCheckedId']);
   watch(checkedItems, () => {
-    store.dispatch('toggleChecked', { id: productNo });
+    // store.dispatch('toggleChecked', { id: productNo });
+    store.dispatch('cartModule/toggleChecked', { id: productNo });
   });
 
   // 삭제하기
   const deleteThisItem = () => {
-    store.dispatch('deleteCart', { id: productNo });
+    // store.dispatch('deleteCart', { id: productNo });
+    store.dispatch('cartModule/deleteCart', { id: productNo });
   };
 
   return {
