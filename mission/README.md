@@ -1,4 +1,4 @@
-# proiject-lion-vue-public
+
 
 ## Project setup
 ```
