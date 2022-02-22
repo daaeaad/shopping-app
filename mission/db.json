@@ -1,72 +1,344 @@
 {
-  "loggedUser": {
-    "status": 1,
-    "data": {
-      "likeProduct": ["p1", "p3"]
-    }
-  },
-  "productList": {
-    "status": 1,
-    "data": [
+  "info": {
+    "name": "김다애",
+    "email": "daae@naver.com",
+    "tel": "01012345678",
+    "delivery": {
+      "name": "김다애",
+      "address1": "123456",
+      "address2": "서울특별시 OO구 OO로 000-00",
+      "address3": "OO오피스텔 000호",
+      "tel": "01012345678"
+    },
+    "likes": ["p1", "p3"],
+    "carts": [
       {
-        "id": "p1",
+        "product_no": "p1",
+        "quantity": 1
+      },
+      {
+        "product_no": "p4",
+        "quantity": 3
+      }
+    ]
+  },
+
+  "cart": {
+    "cart_item": [
+      {
+        "product_no": "p1",
+        "quantity": 1,
         "name": "SWEATSHIRT FLOWERMARDI_GREY",
-        "imgMain": [
-          "https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y"
-        ],
-        "originalPrice": 80000,
-        "currentPrice": 80000,
-        "isPossibleOrde": true,
-        "whyOrderNotPossible": "",
-        "totalLike": 128,
+        "image": "https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y",
+        "original_price": 80000,
+        "price": 80000,
+        "stock_count": 100,
+        "description": "한겨울까지 입을 수 있는 따뜻한 스웨터",
         "options": { "color": ["Black", "White", "Grey"], "size": ["Small", "Medium", "Large"] },
         "store": {
           "companyName": "다애스토어"
         }
       },
       {
-        "id": "p2",
+        "product_no": "p4",
+        "quantity": 3,
+        "name": "MILAGRO WASHED CREWNECK SWEATSHIRT BLACK",
+        "image": "https://i.picsum.photos/id/445/4256/2819.jpg?hmac=99qT1IPidZrzaXTgG1ixRRVwElWXUlNepU2k692G44c",
+        "original_price": 69000,
+        "price": 35000,
+        "stock_count": 100,
+        "description": "판매자도 따로 챙겨놓은 가성비 좋은 아이템",
+        "options": { "color": [], "size": [] },
+        "store": {
+          "companyName": "DAAE Market"
+        }
+      }
+    ]
+  },
+
+  "item": {
+    "items": [
+      {
+        "product_no": "p1",
+        "name": "SWEATSHIRT FLOWERMARDI_GREY",
+        "image": "https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y",
+        "original_price": 80000,
+        "price": 80000,
+        "stock_count": 100,
+        "description": "한겨울까지 입을 수 있는 따듯한 스웨터",
+        "like": 128,
+        "options": { "color": ["Black", "White", "Grey"], "size": ["Small", "Medium", "Large"] },
+        "store": {
+          "companyName": "다애스토어"
+        }
+      },
+      {
+        "product_no": "p2",
         "name": "SWEATSHIRT UNIV_NAVY IVORY",
-        "imgMain": [
-          "https://i.picsum.photos/id/1062/5092/3395.jpg?hmac=o9m7qeU51uOLfXvepXcTrk2ZPiSBJEkiiOp-Qvxja-k"
-        ],
-        "originalPrice": 75000,
-        "currentPrice": 71250,
-        "isPossibleOrde": true,
-        "whyOrderNotPossible": "",
-        "totalLike": 133,
+        "image": "https://i.picsum.photos/id/1062/5092/3395.jpg?hmac=o9m7qeU51uOLfXvepXcTrk2ZPiSBJEkiiOp-Qvxja-k",
+        "original_price": 75000,
+        "price": 71250,
+        "stock_count": 100,
+        "description": "교복처럼 입을 수 있는 데일리룩",
+        "like": 133,
         "options": { "color": [], "size": ["Small", "Medium", "Large"] },
         "store": {
           "companyName": "다애마켓"
         }
       },
       {
-        "id": "p3",
+        "product_no": "p3",
         "name": "ts0307 플리스 후드-베이지",
-        "imgMain": [
-          "https://i.picsum.photos/id/535/2962/3949.jpg?hmac=Cs154XYJYEmSoM-YPHR1Kcp2LDRzxLfKxa67Av3ZIhY"
-        ],
-        "originalPrice": 49700,
-        "currentPrice": 30000,
-        "isPossibleOrde": true,
-        "whyOrderNotPossible": "",
-        "totalLike": 133,
+        "image": "https://i.picsum.photos/id/535/2962/3949.jpg?hmac=Cs154XYJYEmSoM-YPHR1Kcp2LDRzxLfKxa67Av3ZIhY",
+        "original_price": 49700,
+        "price": 30000,
+        "stock_count": 100,
+        "description": "캐주얼하게 입을 수 있는 후드",
+        "like": 133,
         "options": { "color": [], "size": [] },
         "store": {
           "companyName": "DAAE Store"
         }
       },
       {
-        "id": "p4",
+        "product_no": "p4",
         "name": "MILAGRO WASHED CREWNECK SWEATSHIRT BLACK",
-        "imgMain": [
-          "https://i.picsum.photos/id/445/4256/2819.jpg?hmac=99qT1IPidZrzaXTgG1ixRRVwElWXUlNepU2k692G44c"
-        ],
-        "originalPrice": 69000,
-        "currentPrice": 35000,
-        "isPossibleOrde": false,
-        "whyOrderNotPossible": "품절",
-        "totalLike": 4000,
+        "image": "https://i.picsum.photos/id/445/4256/2819.jpg?hmac=99qT1IPidZrzaXTgG1ixRRVwElWXUlNepU2k692G44c",
+        "original_price": 69000,
+        "price": 35000,
+        "stock_count": 100,
+        "description": "판매자도 따로 챙겨놓은 가성비 좋은 아이템",
+        "like": 4000,
+        "options": { "color": [], "size": [] },
+        "store": {
+          "companyName": "DAAE Market"
+        }
+      }
+    ]
+  },
+
+  "search_list": [
+    {
+      "id": "p1",
+      "name": "SWEATSHIRT FLOWERMARDI_GREY",
+      "image": "https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y",
+      "original_price": 80000,
+      "price": 80000,
+      "stock_count": 100,
+      "description": "한겨울까지 입을 수 있는 따듯한 스웨터",
+      "like": 128,
+      "options": { "color": ["Black", "White", "Grey"], "size": ["Small", "Medium", "Large"] },
+      "store": {
+        "companyName": "다애스토어"
+      }
+    },
+    {
+      "id": "p2",
+      "name": "SWEATSHIRT UNIV_NAVY IVORY",
+      "image": "https://i.picsum.photos/id/1062/5092/3395.jpg?hmac=o9m7qeU51uOLfXvepXcTrk2ZPiSBJEkiiOp-Qvxja-k",
+      "original_price": 75000,
+      "price": 71250,
+      "stock_count": 100,
+      "description": "교복처럼 입을 수 있는 데일리룩",
+      "like": 133,
+      "options": { "color": [], "size": ["Small", "Medium", "Large"] },
+      "store": {
+        "companyName": "다애마켓"
+      }
+    },
+    {
+      "id": "p3",
+      "name": "ts0307 플리스 후드-베이지",
+      "image": "https://i.picsum.photos/id/535/2962/3949.jpg?hmac=Cs154XYJYEmSoM-YPHR1Kcp2LDRzxLfKxa67Av3ZIhY",
+      "original_price": 49700,
+      "price": 30000,
+      "stock_count": 100,
+      "description": "캐주얼하게 입을 수 있는 후드",
+      "like": 133,
+      "options": { "color": [], "size": [] },
+      "store": {
+        "companyName": "DAAE Store"
+      }
+    },
+    {
+      "id": "p4",
+      "name": "MILAGRO WASHED CREWNECK SWEATSHIRT BLACK",
+      "image": "https://i.picsum.photos/id/445/4256/2819.jpg?hmac=99qT1IPidZrzaXTgG1ixRRVwElWXUlNepU2k692G44c",
+      "original_price": 69000,
+      "price": 35000,
+      "stock_count": 100,
+      "description": "판매자도 따로 챙겨놓은 가성비 좋은 아이템",
+      "like": 4000,
+      "options": { "color": [], "size": [] },
+      "store": {
+        "companyName": "DAAE Market"
+      }
+    }
+  ],
+
+  "item_detail": [
+    {
+      "id": "p1",
+      "item": {
+        "product_no": "p1",
+        "name": "SWEATSHIRT FLOWERMARDI_GREY",
+        "image": "https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y",
+        "price": 80000,
+        "original_price": 80000,
+        "description": "<div><p><strong>한겨울까지 입을 수 있는 따듯한 스웨터</strong></p> <img style=\"width: 100%;\" src=\"https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y\"/> <p>데일리룩으로 착용하기 아주 좋습니다.</p></div>",
+        "seller": {
+          "seller_no": 1,
+          "name": "다애스토어",
+          "hash_tags": ["여성", "니트"],
+          "profile_image": "https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y"
+        },
+        "reviews": [
+          {
+            "review_no": 1,
+            "writer": "lk***",
+            "title": "만족해요",
+            "content": "핏이 아주 잘 맞습니다. 대만족!",
+            "likes_count": 7,
+            "created": "2021. 12. 04",
+            "img": "https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2",
+      "item": {
+        "product_no": "p2",
+        "name": "SWEATSHIRT UNIV_NAVY IVORY",
+        "image": "https://i.picsum.photos/id/1062/5092/3395.jpg?hmac=o9m7qeU51uOLfXvepXcTrk2ZPiSBJEkiiOp-Qvxja-k",
+        "price": 71250,
+        "original_price": 75000,
+        "description": "<div><p><strong>교복처럼 입을 수 있는 데일리룩</strong></p> <img style=\"width: 100%;\" src=\"https://i.picsum.photos/id/1062/5092/3395.jpg?hmac=o9m7qeU51uOLfXvepXcTrk2ZPiSBJEkiiOp-Qvxja-k\"/> <p>데일리룩으로 착용하기 아주 좋습니다.</p></div>",
+        "seller": {
+          "seller_no": 2,
+          "name": "다애마켓",
+          "hash_tags": ["러블리", "데일리"],
+          "profile_image": "https://i.picsum.photos/id/1062/5092/3395.jpg?hmac=o9m7qeU51uOLfXvepXcTrk2ZPiSBJEkiiOp-Qvxja-k"
+        },
+        "reviews": [
+          {
+            "review_no": 1,
+            "writer": "lk***",
+            "title": "만족해요",
+            "content": "핏이 아주 잘 맞습니다. 대만족!",
+            "likes_count": 7,
+            "created": "2021. 12. 04",
+            "img": "https://i.picsum.photos/id/1062/5092/3395.jpg?hmac=o9m7qeU51uOLfXvepXcTrk2ZPiSBJEkiiOp-Qvxja-k"
+          },
+          {
+            "review_no": 2,
+            "writer": "lk***",
+            "title": "만족해요22",
+            "content": "핏이 아주 잘 맞습니다. 대만족! 222",
+            "likes_count": 7,
+            "created": "2021. 12. 02"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p3",
+      "item": {
+        "product_no": "p3",
+        "name": "ts0307 플리스 후드-베이지",
+        "image": "https://i.picsum.photos/id/535/2962/3949.jpg?hmac=Cs154XYJYEmSoM-YPHR1Kcp2LDRzxLfKxa67Av3ZIhY",
+        "price": 30000,
+        "original_price": 49700,
+        "description": "<div><p><strong>캐주얼하게 입을 수 있는 후드</strong></p> <img style=\"width: 100%;\" src=\"https://i.picsum.photos/id/535/2962/3949.jpg?hmac=Cs154XYJYEmSoM-YPHR1Kcp2LDRzxLfKxa67Av3ZIhY\"/> <p>데일리룩으로 착용하기 아주 좋습니다.</p></div>",
+        "seller": {
+          "seller_no": 3,
+          "name": "DAAE Store",
+          "hash_tags": ["캐주얼", "데일리", "시크"],
+          "profile_image": "https://i.picsum.photos/id/535/2962/3949.jpg?hmac=Cs154XYJYEmSoM-YPHR1Kcp2LDRzxLfKxa67Av3ZIhY"
+        },
+        "reviews": [
+          {
+            "review_no": 1,
+            "writer": "lk***",
+            "title": "만족해요",
+            "content": "핏이 아주 잘 맞습니다. 대만족!",
+            "likes_count": 7,
+            "created": "2021. 12. 04",
+            "img": "https://i.picsum.photos/id/535/2962/3949.jpg?hmac=Cs154XYJYEmSoM-YPHR1Kcp2LDRzxLfKxa67Av3ZIhY"
+          },
+          {
+            "review_no": 2,
+            "writer": "lk***",
+            "title": "만족해요22",
+            "content": "핏이 아주 잘 맞습니다. 대만족! 222",
+            "likes_count": 7,
+            "created": "2021. 12. 02"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4",
+      "item": {
+        "product_no": "p4",
+        "name": "MILAGRO WASHED CREWNECK SWEATSHIRT BLACK",
+        "image": "https://i.picsum.photos/id/445/4256/2819.jpg?hmac=99qT1IPidZrzaXTgG1ixRRVwElWXUlNepU2k692G44c",
+        "price": 35000,
+        "original_price": 69000,
+        "description": "<div><p><strong>판매자도 따로 챙겨놓은 가성비 좋은 아이템</strong></p> <img style=\"width: 100%;\" src=\"https://i.picsum.photos/id/445/4256/2819.jpg?hmac=99qT1IPidZrzaXTgG1ixRRVwElWXUlNepU2k692G44c\"/> <p>데일리룩으로 착용하기 아주 좋습니다.</p></div>",
+        "seller": {
+          "seller_no": 3,
+          "name": "DAAE Market",
+          "hash_tags": ["데일리", "페미닌", "캐주얼"],
+          "profile_image": "https://i.picsum.photos/id/445/4256/2819.jpg?hmac=99qT1IPidZrzaXTgG1ixRRVwElWXUlNepU2k692G44c"
+        },
+        "reviews": [
+          {
+            "review_no": 1,
+            "writer": "lk***",
+            "title": "만족해요",
+            "content": "핏이 아주 잘 맞습니다. 대만족!",
+            "likes_count": 7,
+            "created": "2021. 12. 04",
+            "img": "https://i.picsum.photos/id/445/4256/2819.jpg?hmac=99qT1IPidZrzaXTgG1ixRRVwElWXUlNepU2k692G44c"
+          },
+          {
+            "review_no": 2,
+            "writer": "lk***",
+            "title": "만족해요22",
+            "content": "핏이 아주 잘 맞습니다. 대만족! 222",
+            "likes_count": 7,
+            "created": "2021. 12. 02"
+          }
+        ]
+      }
+    }
+  ],
+
+  "wish": {
+    "items": [
+      {
+        "product_no": "p1",
+        "name": "SWEATSHIRT FLOWERMARDI_GREY",
+        "image": "https://i.picsum.photos/id/1025/4951/3301.jpg?hmac=_aGh5AtoOChip_iaMo8ZvvytfEojcgqbCH7dzaz-H8Y",
+        "original_price": 80000,
+        "price": 80000,
+        "stock_count": 100,
+        "description": "한겨울까지 입을 수 있는 따듯한 스웨터",
+        "like": 128,
+        "options": { "color": ["Black", "White", "Grey"], "size": ["Small", "Medium", "Large"] },
+        "store": {
+          "companyName": "다애스토어"
+        }
+      },
+      {
+        "product_no": "p3",
+        "name": "ts0307 플리스 후드-베이지",
+        "image": "https://i.picsum.photos/id/535/2962/3949.jpg?hmac=Cs154XYJYEmSoM-YPHR1Kcp2LDRzxLfKxa67Av3ZIhY",
+        "original_price": 49700,
+        "price": 30000,
+        "stock_count": 100,
+        "like": 133,
         "options": { "color": [], "size": [] },
         "store": {
           "companyName": "DAAE Store"
