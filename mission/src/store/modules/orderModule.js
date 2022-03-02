@@ -17,7 +17,7 @@ const orderModule = {
     setOrder: (state, items) => {
       state.orders = items;
 
-      console.log('state.orders :: ', state.orders);
+      // console.log('state.orders :: ', state.orders);
     },
     /* } 주문할 상품 데이터 불러오기 끝 */
 

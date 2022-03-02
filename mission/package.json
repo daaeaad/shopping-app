@@ -3,15 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run serve & npm run db",
+    "serve:dev": "npm run serve & npm run db",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "db": "json-server --watch db.json --port 8081"
+    "db": "json-server --watch server/db.json --port 8081",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "gh-pages": "^3.2.3",
     "json-server": "^0.17.0",
     "v-svg-icons": "^1.1.4",
     "vue": "^3.0.0",
@@ -19,6 +22,7 @@
     "vue-ionicons": "^3.0.5",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0",
+    "vuex-persistedstate": "^4.1.0",
     "w3-css": "^4.1.0"
   },
   "devDependencies": {
@@ -38,5 +42,6 @@
     "eslint-plugin-vue": "^7.0.0",
     "typescript": "~3.9.3",
     "vue-jest": "^5.0.0-0"
-  }
+  },
+  "homepage": "https://daaeaad.github.io/shopping-app/"
 }

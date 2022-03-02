@@ -68,14 +68,24 @@ const cartModule = {
   /* ******** actions { ******** */
   actions: {
     /* 장바구니 데이터 불러오기 { */
-    setCart: async ({ commit }) => {
+    setCart: async ({ state, commit }) => {
       const cartDatas = await CartRepository.getList();
 
-      const result = cartDatas.map((cartData) => ({
-        ...cartData,
-        checked: true,
-        total_price: cartData.price * cartData.quantity,
-      }));
+      const result = cartDatas.map((cartData) => {
+        let quantity;
+        if (!state.carts.length) {
+          quantity = cartData.quantity;
+        } else {
+          quantity = state.carts.find((cart) => cart.product_no === cartData.product_no).quantity;
+        }
+
+        return {
+          ...cartData,
+          quantity,
+          checked: true,
+          total_price: cartData.price * quantity,
+        };
+      });
 
       commit('setCart', result);
     },
@@ -192,6 +202,8 @@ const cartModule = {
     getTotalCount: (state, getters) => {
       // 체크된 장바구니 상품들
       const checkedCartItems = getters.getCheckedCartItem;
+
+      console.log('checkedCartItems :: ', checkedCartItems);
 
       let result;
 
