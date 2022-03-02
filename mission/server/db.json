@@ -22,7 +22,6 @@
       }
     ]
   },
-
   "cart": {
     "cart_item": [
       {
@@ -34,7 +33,10 @@
         "price": 80000,
         "stock_count": 100,
         "description": "한겨울까지 입을 수 있는 따뜻한 스웨터",
-        "options": { "color": ["Black", "White", "Grey"], "size": ["Small", "Medium", "Large"] },
+        "options": {
+          "color": ["Black", "White", "Grey"],
+          "size": ["Small", "Medium", "Large"]
+        },
         "store": {
           "companyName": "다애스토어"
         }
@@ -48,14 +50,16 @@
         "price": 35000,
         "stock_count": 100,
         "description": "판매자도 따로 챙겨놓은 가성비 좋은 아이템",
-        "options": { "color": [], "size": [] },
+        "options": {
+          "color": [],
+          "size": []
+        },
         "store": {
           "companyName": "DAAE Market"
         }
       }
     ]
   },
-
   "item": {
     "items": [
       {
@@ -67,7 +71,10 @@
         "stock_count": 100,
         "description": "한겨울까지 입을 수 있는 따듯한 스웨터",
         "like": 128,
-        "options": { "color": ["Black", "White", "Grey"], "size": ["Small", "Medium", "Large"] },
+        "options": {
+          "color": ["Black", "White", "Grey"],
+          "size": ["Small", "Medium", "Large"]
+        },
         "store": {
           "companyName": "다애스토어"
         }
@@ -81,7 +88,10 @@
         "stock_count": 100,
         "description": "교복처럼 입을 수 있는 데일리룩",
         "like": 133,
-        "options": { "color": [], "size": ["Small", "Medium", "Large"] },
+        "options": {
+          "color": [],
+          "size": ["Small", "Medium", "Large"]
+        },
         "store": {
           "companyName": "다애마켓"
         }
@@ -95,7 +105,10 @@
         "stock_count": 100,
         "description": "캐주얼하게 입을 수 있는 후드",
         "like": 133,
-        "options": { "color": [], "size": [] },
+        "options": {
+          "color": [],
+          "size": []
+        },
         "store": {
           "companyName": "DAAE Store"
         }
@@ -109,14 +122,16 @@
         "stock_count": 100,
         "description": "판매자도 따로 챙겨놓은 가성비 좋은 아이템",
         "like": 4000,
-        "options": { "color": [], "size": [] },
+        "options": {
+          "color": [],
+          "size": []
+        },
         "store": {
           "companyName": "DAAE Market"
         }
       }
     ]
   },
-
   "search_list": [
     {
       "id": "p1",
@@ -127,7 +142,10 @@
       "stock_count": 100,
       "description": "한겨울까지 입을 수 있는 따듯한 스웨터",
       "like": 128,
-      "options": { "color": ["Black", "White", "Grey"], "size": ["Small", "Medium", "Large"] },
+      "options": {
+        "color": ["Black", "White", "Grey"],
+        "size": ["Small", "Medium", "Large"]
+      },
       "store": {
         "companyName": "다애스토어"
       }
@@ -141,7 +159,10 @@
       "stock_count": 100,
       "description": "교복처럼 입을 수 있는 데일리룩",
       "like": 133,
-      "options": { "color": [], "size": ["Small", "Medium", "Large"] },
+      "options": {
+        "color": [],
+        "size": ["Small", "Medium", "Large"]
+      },
       "store": {
         "companyName": "다애마켓"
       }
@@ -155,7 +176,10 @@
       "stock_count": 100,
       "description": "캐주얼하게 입을 수 있는 후드",
       "like": 133,
-      "options": { "color": [], "size": [] },
+      "options": {
+        "color": [],
+        "size": []
+      },
       "store": {
         "companyName": "DAAE Store"
       }
@@ -169,13 +193,15 @@
       "stock_count": 100,
       "description": "판매자도 따로 챙겨놓은 가성비 좋은 아이템",
       "like": 4000,
-      "options": { "color": [], "size": [] },
+      "options": {
+        "color": [],
+        "size": []
+      },
       "store": {
         "companyName": "DAAE Market"
       }
     }
   ],
-
   "item_detail": [
     {
       "id": "p1",
