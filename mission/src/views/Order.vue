@@ -158,7 +158,7 @@
   <!-- } 목록 -->
 
   <!-- Nav(풋터) { -->
-  <Footer :btn="true" :btnContent="`원 결제하기`" />
+  <Footer :btn="true" :btnContent="`${getAllTotalPrice}원 결제하기`" />
   <!-- } Nav(풋터) 끝 -->
 </template>
 
